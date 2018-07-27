@@ -1,0 +1,33 @@
+{
+  "name": "magnitoodz",
+  "version": "1.0.0",
+  "description": "A web app for making comparisons",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:frontend:dev": "parcel src/index.html --out-dir dist/frontend --target browser",
+    "build:backend:dev": "parcel src/backend/index.ts --out-dir dist/backend --target node",
+    "start:backend:dev": "nodemon --exec 'node -r dotenv/config' dist/backend/index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mgeduld/magnitoodz.git"
+  },
+  "author": "Marcus Geduld",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mgeduld/magnitoodz/issues"
+  },
+  "homepage": "https://github.com/mgeduld/magnitoodz#readme",
+  "devDependencies": {
+    "@types/node": "^10.5.3",
+    "dotenv": "^6.0.0",
+    "nodemon": "^1.18.3",
+    "typescript": "^2.9.2"
+  },
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "parcel-bundler": "^1.9.7"
+  }
+}
