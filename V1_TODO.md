@@ -26,6 +26,7 @@ Users will be able to register, log in, and log out. Only logged-in users will b
 - display Magnitoodz of as particular user
 - display latest Magnitoodz
 - display a random Magnitood
+- forward/back flip from Magnitood to Magnitood?
 - mobile
 - email a Magnitood?
 - favorites?
@@ -95,5 +96,6 @@ Users will be able to register, log in, and log out. Only logged-in users will b
     * [] action creators
     * [] composed componants
     * [] routes
+* [] remove repo, clone, try re-init
 * [] finalize V1 README
 
