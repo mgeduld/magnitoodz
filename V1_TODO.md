@@ -33,7 +33,7 @@ Users will be able to register, log in, and log out. Only logged-in users will b
 
 ## Tasks
 
-* [] set up code-base infrustructure
+* [x] set up code-base infrustructure
     * [x] add .gitignore
     * [x] add parcel
     * [x] add nodemon
@@ -49,8 +49,8 @@ Users will be able to register, log in, and log out. Only logged-in users will b
     * [x] add tslint
     * [x] add @types/node
     * [x] add @types/express
-    * [] add unit-testing framework
-    * [] add code-coverage tool
+    * [x] add unit-testing framework
+    * [x] add code-coverage tool
 * [x] set up postgresql
     * [x] install
     * [x] create db
