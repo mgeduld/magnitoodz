@@ -61,11 +61,11 @@ Users will be able to register, log in, and log out. Only logged-in users will b
     * [x] create seed files
     * [x] add db creation, migrations, and seeding to setup.sh
 * [] set up frontend infrustructure
-    * [] react
-    * [] redux
-    * [] recompose
-    * [] sagas
-    * [] action creators
+    * [x] react
+    * [x] redux
+    * [x] recompose
+    * [x] sagas
+    * [x] action creators
     * [] react router
     * [] tachyons
     * [] constants
