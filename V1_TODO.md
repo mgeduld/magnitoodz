@@ -51,6 +51,7 @@ Users will be able to register, log in, and log out. Only logged-in users will b
     * [x] add @types/express
     * [x] add unit-testing framework
     * [x] add code-coverage tool
+    * [x] add types.d.ts with basic info, e.g. declare module '*.png'
 * [x] set up postgresql
     * [x] install
     * [x] create db
