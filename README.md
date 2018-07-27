@@ -6,11 +6,6 @@
 - install [postgresql](https://www.postgresql.org/download/)
 - `./setup.sh`
 
--bun
-## ?
-
-`npm install -g knex`
-
 ## Local development
 
 In three terminal windows:

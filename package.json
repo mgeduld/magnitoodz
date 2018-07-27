@@ -25,6 +25,8 @@
     "dotenv": "^6.0.0",
     "knex-migrate": "^1.6.1",
     "nodemon": "^1.18.3",
+    "tslint": "^5.11.0",
+    "tslint-config-airbnb": "^5.9.2",
     "typescript": "^2.9.2"
   },
   "dependencies": {
