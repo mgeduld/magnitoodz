@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { connect, Provider } from 'react-redux'
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
 import { store } from './store'
 
 interface ISets {
@@ -51,7 +52,24 @@ const ConnectedStorePrinter = connect(
 export const App: React.SFC<null> = () => {
     return (
         <Provider store={store} >
-            <ConnectedStorePrinter />
+            <Router>
+                <div>
+                    <ul>
+                        <li><Link to="/">HOME</Link></li>
+                        <li><Link to="/A">A</Link></li>
+                        <li><Link to="/B">B</Link></li>
+                    </ul>
+                    <Route exact={true} path="/" render={() => {
+                        return <div>HOME</div>
+                    }} />
+                    <Route exect={true} path="/A" render={() => {
+                        return <div>A</div>
+                    }} />
+                    <Route exect={true} path="/B" render={() => {
+                        return <div><ConnectedStorePrinter /></div>
+                    }} />
+                </div>
+            </Router>
         </Provider>
     )
 } 

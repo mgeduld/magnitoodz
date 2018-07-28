@@ -66,7 +66,7 @@ Users will be able to register, log in, and log out. Only logged-in users will b
     * [x] recompose
     * [x] sagas
     * [x] action creators
-    * [] react router
+    * [x] react router
     * [] tachyons
     * [] constants
     * [] utils
