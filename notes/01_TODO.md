@@ -70,7 +70,7 @@ Users will be able to register, log in, and log out. Only logged-in users will b
     * [x] tachyons
     * [x] constants
     * [x] utils
-* [] set up backend infrustructure
+* [x] set up backend infrustructure
     * [x] express
     * [x] api
     * [x] queries
