@@ -60,7 +60,7 @@ Users will be able to register, log in, and log out. Only logged-in users will b
     * [x] create migrations to create tables
     * [x] create seed files
     * [x] add db creation, migrations, and seeding to setup.sh
-* [] set up frontend infrustructure
+* [x] set up frontend infrustructure
     * [x] react
     * [x] redux
     * [x] recompose
@@ -68,8 +68,8 @@ Users will be able to register, log in, and log out. Only logged-in users will b
     * [x] action creators
     * [x] react router
     * [x] tachyons
-    * [] constants
-    * [] utils
+    * [x] constants
+    * [x] utils
 * [] set up backend infrustructure
     * [] express
     * [] api
