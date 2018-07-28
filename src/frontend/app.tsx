@@ -2,6 +2,7 @@ import * as React from 'react'
 import { connect, Provider } from 'react-redux'
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
 import { store } from './store'
+import 'tachyons/css/tachyons.css'
 
 interface ISets {
     set1: number[];
@@ -53,7 +54,7 @@ export const App: React.SFC<null> = () => {
     return (
         <Provider store={store} >
             <Router>
-                <div>
+                <div className="bg-blue">
                     <ul>
                         <li><Link to="/">HOME</Link></li>
                         <li><Link to="/A">A</Link></li>
