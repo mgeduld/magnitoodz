@@ -71,10 +71,10 @@ Users will be able to register, log in, and log out. Only logged-in users will b
     * [x] constants
     * [x] utils
 * [] set up backend infrustructure
-    * [] express
-    * [] api
-    * [] queries
-    * [] utils
+    * [x] express
+    * [x] api
+    * [x] queries
+    * [x] utils
 * [] make api
     * [] signup
     * [] login
