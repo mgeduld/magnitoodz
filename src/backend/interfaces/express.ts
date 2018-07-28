@@ -10,5 +10,6 @@ export interface IResponse {
 }
 
 export interface IRequest {
-
+    params: { [key: string]: any }
 }
+

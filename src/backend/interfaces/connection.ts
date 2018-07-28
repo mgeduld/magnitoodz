@@ -1,3 +1,3 @@
 export interface IConnection {
-    (name: string): Promise<any>;
+    (name: string): any;
 }

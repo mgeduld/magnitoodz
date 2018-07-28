@@ -79,7 +79,7 @@ Users will be able to register, log in, and log out. Only logged-in users will b
     * [] signup
     * [] login
     * [] logout
-    * [] get Magnitoodz
+    * [x] get Magnitoodz
     * [] get Magnitood
     * [] post Magnitood
 * [] make "pages"

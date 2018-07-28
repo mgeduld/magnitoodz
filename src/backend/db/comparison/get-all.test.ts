@@ -2,7 +2,7 @@ import test from 'ava'
 import { factory } from './get-all'
 import { IConnection } from '../../interfaces/connection';
 
-test('db:comparison:getAll()', async (t: any) => {
+test('db:comparison:getAll() makes a connection that returns a promise', async (t: any) => {
     const connection: IConnection = () => {
         return Promise.resolve('foo')
     }

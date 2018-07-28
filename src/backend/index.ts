@@ -21,7 +21,7 @@ app.use(cors(
     }
 ));
 
-app.use('/', comparisonApi)
+app.use('/api/v1/', comparisonApi)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

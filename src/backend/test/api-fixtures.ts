@@ -29,10 +29,10 @@ export const apiDoubleFactory = (request: object = {}) => {
         }
     }
     const api: IRestApi = {
-        get(route: string, callback: Function) { callback(request, response('get')) },
-        post(route: string, callback: Function) { callback(request, response('post')) },
-        put(route: string, callback: Function) { callback(request, response('put')) },
-        delete(route: string, callback: Function) { callback(request, response('delete')) }
+        get(route: string, ...args: Function[]) { args[args.length - 1](request, response('get')) },
+        post(route: string, ...args: Function[]) { args[args.length - 1](request, response('post')) },
+        put(route: string, ...args: Function[]) { args[args.length - 1](request, response('put')) },
+        delete(route: string, ...args: Function[]) { args[args.length - 1](request, response('delete')) }
     }
     return {
         api,
