@@ -2,7 +2,7 @@ import test from 'ava'
 import { factory } from './get-one-by-id'
 import { IConnection } from '../../interfaces/connection';
 
-test('db:comparison:getOneById() makes a connection that returns a promise', async (t: any) => {
+test('db:user:getOneById() runs make a connection that returns a promise', async (t: any) => {
     const connection: IConnection = () => {
         return {
             where() {

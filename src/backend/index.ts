@@ -1,5 +1,6 @@
 import express = require('express')
 import cors = require('cors')
+import logger = require('morgan')
 import * as cookieParser from 'cookie-parser'
 import * as bodyParser from 'body-parser'
 
@@ -9,6 +10,7 @@ const PORT = process.env.SERVER_PORT;
 
 const app: express.Application = express();
 
+app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));

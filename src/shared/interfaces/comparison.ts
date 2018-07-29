@@ -1,7 +1,7 @@
 export interface IComparison {
     created_at: string;
     description?: string;
-    id: number;
+    id?: number;
     meta?: string;
     rating: number;
     span_1_magnitude: number;
@@ -10,5 +10,6 @@ export interface IComparison {
     span_2_name?: string;
     title?: string;
     updated_at: string;
+    unit?: string;
     user_id: number;
 }

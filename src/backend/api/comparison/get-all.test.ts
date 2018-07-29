@@ -10,8 +10,9 @@ test('api:comparison:getAll triggers a query and the submits a response', async 
     t.truthy(typeof getAll === 'function')
 
     await getAll()
-    t.truthy(queryDouble.wasCalled())
-    t.is(queryDouble.timesCalled(), 1)
+
+    const wasCalled = await queryDouble.wasCalled()
+    t.truthy(wasCalled)
 
     const { calledForMethod, calledWithArg } = await apiDouble.called()
     t.is(calledForMethod, 'get')

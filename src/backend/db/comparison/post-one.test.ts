@@ -1,22 +1,22 @@
 import test from 'ava'
-import { factory } from './get-one-by-id'
+import { factory } from './post-one'
 import { IConnection } from '../../interfaces/connection';
 
-test('db:comparison:getOneById() makes a connection that returns a promise', async (t: any) => {
+test('db:comparison:postOne() makes a connection that returns a promise', async (t: any) => {
     const connection: IConnection = () => {
         return {
-            where() {
+            insert() {
                 return {
-                    first() {
+                    then() {
                         return Promise.resolve('foo')
                     }
                 }
             }
         }
     }
-    const getOneById = factory(connection)
-    t.truthy(typeof getOneById === 'function')
+    const postOne = factory(connection)
+    t.truthy(typeof postOne === 'function')
 
-    const result = await getOneById(1)
+    const result = await postOne(1)
     t.is(result, 'foo')
 })

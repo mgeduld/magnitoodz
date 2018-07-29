@@ -20,6 +20,7 @@ import { IRestApi } from '../interfaces/express'
 export const apiDoubleFactory = (request: object = {}) => {
     let calledWithArg
     let calledForMethod
+    let nextCalledWith
     const response = (caller: string) => {
         return {
             json(value: any) {
@@ -28,19 +29,23 @@ export const apiDoubleFactory = (request: object = {}) => {
             }
         }
     }
+    const next = (caller: string) => (value: any) => {
+        nextCalledWith = value
+        calledForMethod = caller
+    }
     const api: IRestApi = {
-        get(route: string, ...args: Function[]) { args[args.length - 1](request, response('get')) },
-        post(route: string, ...args: Function[]) { args[args.length - 1](request, response('post')) },
-        put(route: string, ...args: Function[]) { args[args.length - 1](request, response('put')) },
-        delete(route: string, ...args: Function[]) { args[args.length - 1](request, response('delete')) }
+        get(route: string, ...args: Function[]) { args[args.length - 1](request, response('get'), next('get')) },
+        post(route: string, ...args: Function[]) { args[args.length - 1](request, response('post'), next('post')) },
+        put(route: string, ...args: Function[]) { args[args.length - 1](request, response('put'), next('put')) },
+        delete(route: string, ...args: Function[]) { args[args.length - 1](request, response('delete'), next('delete')) }
     }
     return {
         api,
-        called(): Promise<{ calledWithArg: 'string', calledForMethod: any }> {
+        called(): Promise<{ calledWithArg: 'string', calledForMethod: any, nextCalledWith: any }> {
             return new Promise(resolve => {
                 const id = setInterval(() => {
                     if (calledForMethod) {
-                        resolve({ calledWithArg, calledForMethod })
+                        resolve({ calledWithArg, calledForMethod, nextCalledWith })
                         clearInterval(id)
                     }
                 }, 50)
@@ -65,19 +70,26 @@ export const apiDoubleFactory = (request: object = {}) => {
  * 
  * @param response response that comes back from the query
  */
-export const queryDoubleFactory = (response: any) => {
+export const queryDoubleFactory = (response?: any) => {
     let called = false
-    let callCount = 0
     return {
-        wasCalled() {
-            return called
-        },
-        timesCalled() {
-            return callCount
+        wasCalled(): Promise<any> {
+            return new Promise(resolve => {
+                let count = 0
+                const id = setInterval(() => {
+                    if (count++ === 20) {
+                        resolve(false)
+                        clearInterval(id)
+                    }
+                    if (called) {
+                        resolve(true)
+                        clearInterval(id)
+                    }
+                }, 50)
+            })
         },
         query(): Promise<any> {
             called = true
-            callCount++
             return Promise.resolve(response)
         }
     }
