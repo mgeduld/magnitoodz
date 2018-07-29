@@ -5,6 +5,7 @@ import { Authentication } from '../../enums/authentication'
 import { isValidObject } from '../../utils/validation'
 import { IUser } from '../../interfaces/user'
 import { setUserIdCookie } from '../../utils/response'
+import { ErrorMessage } from '../../enums/error-message';
 
 const requiredFields = ['name', 'email', 'password']
 const optionalFields = ['meta']
@@ -37,7 +38,7 @@ const addNewUser = async ({ password, createUserQuery, req, res }) => {
 
 const confirmUser = ({ user, next, password, createUserQuery, req, res }) => {
     user
-        ? next(new Error('Display name and/or email already registered'))
+        ? next(new Error(ErrorMessage.alreadyRegistered))
         : addNewUser({ password, createUserQuery, req, res })
 }
 
@@ -51,6 +52,6 @@ export const factory = (api: IRestApi, getUserByEmailOrNameQuery: Function, crea
     api.post('/signup', async (req: IRequest, res: IResponse, next: Function) => {
         isValidObject(req.body, requiredFields, optionalFields)
             ? searchUser({ req, getUserByEmailOrNameQuery, next, createUserQuery, res })
-            : next(new Error('Invalid credentials'))
+            : next(new Error(ErrorMessage.invalidCredentials))
     })
 }

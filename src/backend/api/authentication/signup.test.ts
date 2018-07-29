@@ -1,6 +1,7 @@
 import test from 'ava'
 import { factory } from './signup'
 import { apiDoubleFactory, queryDoubleFactory } from '../../test/api-fixtures'
+import { ErrorMessage } from '../../enums/error-message';
 
 test('api:authentication:signup triggers queries and then submits a response', async (t: any) => {
     const apiDouble = apiDoubleFactory({
@@ -88,7 +89,7 @@ test('api:authentication:signup fails when a user already exists with same email
 
     const { calledForMethod, nextCalledWith } = await apiDouble.called()
     t.is(calledForMethod, 'post')
-    t.deepEqual(nextCalledWith, new Error('Display name and/or email already registered'))
+    t.deepEqual(nextCalledWith, new Error(ErrorMessage.alreadyRegistered))
 })
 
 test('api:authentication:signup fails credentials are invalid', async (t: any) => {
@@ -118,5 +119,5 @@ test('api:authentication:signup fails credentials are invalid', async (t: any) =
 
     const { calledForMethod, nextCalledWith } = await apiDouble.called()
     t.is(calledForMethod, 'post')
-    t.deepEqual(nextCalledWith, new Error('Invalid credentials'))
+    t.deepEqual(nextCalledWith, new Error(ErrorMessage.invalidCredentials))
 })

@@ -1,6 +1,7 @@
 import test from 'ava'
 import { factory } from './post-one'
 import { apiDoubleFactory, queryDoubleFactory } from '../../test/api-fixtures'
+import { ErrorMessage } from '../../enums/error-message';
 
 test('api:comparison:postOne triggers queries and then submits a response', async (t: any) => {
     const apiDouble = apiDoubleFactory({
@@ -55,7 +56,7 @@ test('api:comparison:postOne fails due to bad userId', async (t: any) => {
 
     const { calledForMethod, nextCalledWith } = await apiDouble.called()
     t.is(calledForMethod, 'post')
-    t.deepEqual(nextCalledWith, new Error('Invalid user id NO SUCH USER'))
+    t.deepEqual(nextCalledWith, new Error(`${ErrorMessage.invalidUserId}NO SUCH USER`))
 })
 
 test('api:comparison:postOne fails due to bad criteria in body', async (t: any) => {
@@ -83,5 +84,5 @@ test('api:comparison:postOne fails due to bad criteria in body', async (t: any) 
 
     const { calledForMethod, nextCalledWith } = await apiDouble.called()
     t.is(calledForMethod, 'post')
-    t.truthy(nextCalledWith.message.match(/Invalid criteria in/))
+    t.truthy(nextCalledWith.message.match(ErrorMessage.invalidCriteria))
 })

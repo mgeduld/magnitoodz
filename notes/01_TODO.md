@@ -77,7 +77,7 @@ Users will be able to register, log in, and log out. Only logged-in users will b
     * [x] utils
 * [] make api
     * [x] signup
-    * [] login
+    * [x] login
     * [] logout
     * [x] get Magnitoodz
     * [x] get Magnitood
