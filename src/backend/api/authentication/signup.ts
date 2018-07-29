@@ -4,6 +4,7 @@ import bcrypt = require('bcrypt')
 import { Authentication } from '../../enums/authentication'
 import { isValidObject } from '../../utils/validation'
 import { IUser } from '../../interfaces/user'
+import { setUserIdCookie } from '../../utils/response'
 
 const requiredFields = ['name', 'email', 'password']
 const optionalFields = ['meta']
@@ -22,14 +23,6 @@ const buildUser = (credentials: { [key: string]: any }, passwordHash: string) =>
     return user;
 }
 
-const setUserIdCookie = (req: IRequest, res: IResponse, id: number) => {
-    res.cookie('user_id', id, {
-        httpOnly: true,
-        secure: req.app.get('env') === 'production',
-        signed: true
-    })
-}
-
 const addNewUser = async ({ password, createUserQuery, req, res }) => {
     const passwordHash = await bcrypt.hash(password, Authentication.salt)
     const user = buildUser(req.body, passwordHash)
@@ -42,22 +35,22 @@ const addNewUser = async ({ password, createUserQuery, req, res }) => {
     })
 }
 
-const maybeAddNewUser = ({ user, next, password, createUserQuery, req, res }) => {
-    if (user) {
-        next(new Error('Display name and/or email already registered'))
-    } else {
-        addNewUser({ password, createUserQuery, req, res })
-    }
+const confirmUser = ({ user, next, password, createUserQuery, req, res }) => {
+    user
+        ? next(new Error('Display name and/or email already registered'))
+        : addNewUser({ password, createUserQuery, req, res })
+}
+
+const searchUser = async ({ req, getUserByEmailOrNameQuery, next, createUserQuery, res }) => {
+    const { email, name, password } = req.body
+    const user = await getUserByEmailOrNameQuery(email, name)
+    confirmUser({ user, next, password, createUserQuery, req, res })
 }
 
 export const factory = (api: IRestApi, getUserByEmailOrNameQuery: Function, createUserQuery: Function) => () => {
     api.post('/signup', async (req: IRequest, res: IResponse, next: Function) => {
-        if (isValidObject(req.body, requiredFields, optionalFields)) {
-            const { email, name, password } = req.body
-            const user = await getUserByEmailOrNameQuery(email, name)
-            maybeAddNewUser({ user, next, password, createUserQuery, req, res })
-        } else {
-            next(new Error('Invalid credentials'))
-        }
+        isValidObject(req.body, requiredFields, optionalFields)
+            ? searchUser({ req, getUserByEmailOrNameQuery, next, createUserQuery, res })
+            : next(new Error('Invalid credentials'))
     })
 }

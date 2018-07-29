@@ -99,4 +99,8 @@ Users will be able to register, log in, and log out. Only logged-in users will b
     * [] routes
 * [] remove repo, clone, try re-init
 * [] finalize V1 README
+* [] stragglers
+    * [] refactor big functions
+    * [] beef up validation
+    * [] get rid of all magin strings/numbers
 

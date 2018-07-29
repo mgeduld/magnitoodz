@@ -1,8 +1,8 @@
 import test from 'ava'
-import { factory } from './get-one-by-id'
+import { factory } from './get-one-by-email'
 import { IConnection } from '../../interfaces/connection';
 
-test('db:user:getOneById() makes a connection that returns a promise', async (t: any) => {
+test('db:user:getOneByEmail() makes a connection that returns a promise', async (t: any) => {
     const connection: IConnection = () => {
         return {
             where() {
@@ -14,9 +14,9 @@ test('db:user:getOneById() makes a connection that returns a promise', async (t:
             }
         }
     }
-    const getOneById = factory(connection)
-    t.truthy(typeof getOneById === 'function')
+    const getOneByEmail = factory(connection)
+    t.truthy(typeof getOneByEmail === 'function')
 
-    const result = await getOneById(1)
+    const result = await getOneByEmail('foo')
     t.is(result, 'foo')
 })

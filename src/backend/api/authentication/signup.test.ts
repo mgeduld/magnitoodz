@@ -98,7 +98,7 @@ test('api:authentication:signup fails credentials are invalid', async (t: any) =
         },
         body: {
             name: 'Percy',
-            // missing email
+            // missing email param
             password: 'sausageNum1!',
             meta: 'likes treats'
         }
