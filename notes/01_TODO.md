@@ -76,12 +76,12 @@ Users will be able to register, log in, and log out. Only logged-in users will b
     * [x] queries
     * [x] utils
 * [] make api
-    * [] signup
+    * [x] signup
     * [] login
     * [] logout
     * [x] get Magnitoodz
-    * [] get Magnitood
-    * [] post Magnitood
+    * [x] get Magnitood
+    * [x] post Magnitood
 * [] make "pages"
     * [] home - description and list
     * [] about

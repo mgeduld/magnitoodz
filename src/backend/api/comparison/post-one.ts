@@ -1,14 +1,11 @@
-import { IComparison } from '../../../shared/interfaces/comparison'
 import { IRestApi, IRequest, IResponse } from '../../interfaces/express'
+import { isValidObject } from '../../utils/validation'
 
-const mustHave = ['span_1_magnitude', 'span_2_magnitude', 'span_1_name', 'span_2_name', 'user_id']
-const canHave = ['description', 'meta', 'span_1_name', 'span_2_name', 'title', 'unit']
-const union = [...mustHave, ...canHave]
+const requiredFields = ['span_1_magnitude', 'span_2_magnitude', 'span_1_name', 'span_2_name', 'user_id']
+const optionalFields = ['description', 'meta', 'span_1_name', 'span_2_name', 'title', 'unit']
 
 const buildComparison = (body: { [key: string]: any }): object | null => {
-    const hasAllRequiredFields = mustHave.every(key => body[key])
-    const hasNoExtras = Object.keys(body).every(key => union.indexOf(key) !== -1)
-    if (hasAllRequiredFields && hasNoExtras) {
+    if (isValidObject(body, requiredFields, optionalFields)) {
         return {
             ...body,
             created_at: new Date().toUTCString(),

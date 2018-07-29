@@ -5,7 +5,7 @@ import { factory as postOneFactory } from './post-one'
 import {
     getAll as getAllQuery,
     getOneById as getOneByIdQuery,
-    postOne as postOneQuery
+    createOne as createOneQuery
 } from '../../db/comparison'
 import { getOneById as getOneUserByIdQuery } from '../../db/user'
 
@@ -13,4 +13,4 @@ export const api: Router = Router()
 
 getAllApiFactory(api, getAllQuery)()
 getOneByIdFactory(api, getOneByIdQuery)()
-postOneFactory(api, getOneUserByIdQuery, postOneQuery)()
+postOneFactory(api, getOneUserByIdQuery, createOneQuery)()

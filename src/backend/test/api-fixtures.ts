@@ -26,7 +26,8 @@ export const apiDoubleFactory = (request: object = {}) => {
             json(value: any) {
                 calledWithArg = value
                 calledForMethod = caller
-            }
+            },
+            cookie() { }
         }
     }
     const next = (caller: string) => (value: any) => {

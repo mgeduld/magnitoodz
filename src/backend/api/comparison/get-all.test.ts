@@ -1,6 +1,5 @@
 import test from 'ava'
 import { factory } from './get-all'
-import { IRestApi } from '../../interfaces/express';
 import { apiDoubleFactory, queryDoubleFactory } from '../../test/api-fixtures'
 
 test('api:comparison:getAll triggers a query and the submits a response', async (t: any) => {

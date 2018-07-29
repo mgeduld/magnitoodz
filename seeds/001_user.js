@@ -1,30 +1,33 @@
 
-exports.seed = function(knex, Promise) {
+exports.seed = function (knex, Promise) {
   // Deletes ALL existing entries
   return knex('user').del()
     .then(function () {
       // Inserts seed entries
       return knex('user').insert([
         {
-          name: 'Andy',
-          email: 'andy@yay.com',
-          password: 'andypw',
-          created_at: new Date(),
-          updated_at: new Date()
+          name: 'Percy',
+          email: 'percy@kittehquat.com',
+          password: '$2b$10$9qRc4gXEcY697OBMvsxB4.tPfDdcWRmNj9BvoG5quV733U20GfObm',
+          meta: 'pw = sausageNum1!',
+          created_at: new Date().toUTCString(),
+          updated_at: new Date().toUTCString()
         },
         {
-          name: 'Bill',
-          email: 'bill@yay.com',
-          password: 'billpw',
-          created_at: new Date(),
-          updated_at: new Date()
+          name: 'Oscar',
+          email: 'oscar@kittehquat.com',
+          password: '$2b$10$9qRc4gXEcY697OBMvsxB4.tPfDdcWRmNj9BvoG5quV733U20GfObm',
+          meta: 'pw = sausageNum1!',
+          created_at: new Date().toUTCString(),
+          updated_at: new Date().toUTCString()
         },
         {
-          name: 'Charlie',
-          email: 'charlie@yay.com',
-          password: 'charliepw',
-          created_at: new Date(),
-          updated_at: new Date()
+          name: 'Bee',
+          email: 'bee@kittehquat.com',
+          password: '$2b$10$9qRc4gXEcY697OBMvsxB4.tPfDdcWRmNj9BvoG5quV733U20GfObm',
+          meta: 'pw = sausageNum1!',
+          created_at: new Date().toUTCString(),
+          updated_at: new Date().toUTCString()
         },
       ]);
     });

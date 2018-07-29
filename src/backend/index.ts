@@ -5,6 +5,7 @@ import * as cookieParser from 'cookie-parser'
 import * as bodyParser from 'body-parser'
 
 import { api as comparisonApi } from './api/comparison'
+import { api as authenticationApi } from './api/authentication'
 
 const PORT = process.env.SERVER_PORT;
 
@@ -24,6 +25,7 @@ app.use(cors(
 ));
 
 app.use('/api/v1/', comparisonApi)
+app.use('/api/v1/', authenticationApi)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

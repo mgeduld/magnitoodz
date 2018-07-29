@@ -2,7 +2,7 @@ import test from 'ava'
 import { factory } from './post-one'
 import { apiDoubleFactory, queryDoubleFactory } from '../../test/api-fixtures'
 
-test('api:comparison:postOne triggers a query and the submits a response', async (t: any) => {
+test('api:comparison:postOne triggers queries and then submits a response', async (t: any) => {
     const apiDouble = apiDoubleFactory({
         body: {
             user_id: '2',

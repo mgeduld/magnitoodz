@@ -1,6 +1,5 @@
 import test from 'ava'
 import { factory } from './get-one-by-id'
-import { IRestApi } from '../../interfaces/express';
 import { apiDoubleFactory, queryDoubleFactory } from '../../test/api-fixtures'
 
 test('api:comparison:getOneById triggers a query and the submits a response', async (t: any) => {
