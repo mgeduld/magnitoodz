@@ -19,6 +19,13 @@
     "url": "https://github.com/mgeduld/magnitoodz/issues"
   },
   "homepage": "https://github.com/mgeduld/magnitoodz#readme",
+  "nyc": {
+    "extension": [
+      ".jsx",
+      ".ts",
+      ".tsx"
+    ]
+  },
   "devDependencies": {
     "@types/body-parser": "^1.17.0",
     "@types/cookie-parser": "^1.4.1",
