@@ -8,6 +8,7 @@ export interface IRestApi {
 export interface IResponse {
     json?: (value: object | Array<any>) => Promise<any>
     cookie?(key: string, value: any, config: object)
+    clearCookie?(key: string)
 }
 
 export interface IRequest {
