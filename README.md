@@ -6,9 +6,11 @@ Magnitooz is a web app for making comparisons. It's inspired by Carl Sagon's Cos
 
 This app allows users to create comparisons (visualied as line charts) and view the ones they and other users have created.
 
-![contents](https://www.dropbox.com/s/7ivbvv9tth9l5v8/contents.png?dl=0)
-![dinosaurs vs humans](https://www.dropbox.com/s/tjg7tlkwsb51bqp/dinosaurs.png?dl=0g)
-![jellyfish vs humans](https://www.dropbox.com/s/9dkf3peqkkkusiq/jellyfish.png?dl=0)
+![contents](images/contents.png)
+
+![dinosaurs vs humans](images/dinosaurs.png)
+
+![jellyfish vs humans](images/jellyfish.png)
 
 ## Project status
 
