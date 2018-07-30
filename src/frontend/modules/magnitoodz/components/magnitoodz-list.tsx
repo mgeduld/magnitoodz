@@ -7,9 +7,9 @@ interface IProps {
 }
 
 const renderItems = (data: IComparison[]) => {
-    return data.map(({ title, id }: IComparison) => {
+    return data.map(({ title, user_name, id }: IComparison) => {
         return (
-            <li key={id}><Link to={`/magnitood/${id}`}>{title}</Link></li>
+            <li key={id}><Link to={`/magnitood/${id}`}>{title}</Link> by {user_name}</li>
         )
     })
 }

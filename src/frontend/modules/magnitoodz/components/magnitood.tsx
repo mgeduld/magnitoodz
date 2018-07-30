@@ -13,7 +13,8 @@ const renderSmallMagnitude = ({
     smallMagnitudeName,
     maxChunks,
     unit,
-    spans = []
+    spans = [],
+    key = 0
 }) => {
     const chunkSize = bigMagnitude / maxChunks
     const currentColor = colors[spans.length]
@@ -25,14 +26,13 @@ const renderSmallMagnitude = ({
     if (smallMagnitude >= chunkSize) {
         return [
             ...spans,
-            <div>
+            <div key={key}>
                 <p className="b i">
                     {smallMagnitudeName && <span>{smallMagnitudeName} </span>}
                     <span>{smallMagnitude} </span>
                     {unit && <span>{unit}</span>}
                 </p>
                 <MagnitoodSpan
-                    index={spans.length}
                     chunks={wholeNumChunks}
                     last={hasFractionalPart ? FinalChunk.dim : FinalChunk.normal}
                     color={currentColor}
@@ -43,7 +43,7 @@ const renderSmallMagnitude = ({
         const soFar = [
             ...spans,
             <Comparison
-                index={spans.length}
+                key={key}
                 bigChunkSize={chunkSize}
                 smallChunkSize={wholeNumChunks}
                 unit={unit}
@@ -59,7 +59,8 @@ const renderSmallMagnitude = ({
             smallMagnitudeName,
             maxChunks,
             unit,
-            spans: soFar
+            spans: soFar,
+            key: key + 1
         })
     }
 }
@@ -101,7 +102,9 @@ class Magnitood extends React.Component<IProps> {
                 span_2_name,
                 span_1_magnitude,
                 span_2_magnitude,
-                unit, description
+                unit,
+                description,
+                user_name
             } = this.props.magnitood
             const maxChunks = 100
             const bigMagnitude = Math.max(span_1_magnitude, span_2_magnitude)
@@ -112,6 +115,7 @@ class Magnitood extends React.Component<IProps> {
             return (
                 <div className='w-60'>
                     {title && <h2>{title}</h2>}
+                    <p>author: {user_name}</p>
                     {description && <p>{description}</p>}
                     <div className="ml3 mt4">
                         <p className="b i">
