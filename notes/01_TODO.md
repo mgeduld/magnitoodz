@@ -83,19 +83,23 @@ Users will be able to register, log in, and log out. Only logged-in users will b
     * [x] get Magnitood
     * [x] post Magnitood
 * [] make "pages"
-    * [] home - description and list
-    * [] about
-    * [] Magnitood
+    * [x] list
+    * [x] Magnitood
+    * [*] about
     * [] create
     * [] signup
     * [] login
     * [] create ability to log out
     * [] create loader...
-* [] make frontend controllers
+* [x] make frontend controllers for magnitoodz
+    * [x] reducers
+    * [x] sagas
+    * [x] action creators
+    * [x] routes
+* [] make frontend controllers for authentication
     * [] reducers
     * [] sagas
     * [] action creators
-    * [] composed componants
     * [] routes
 * [] remove repo, clone, try re-init
 * [] finalize V1 README

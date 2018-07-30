@@ -3,6 +3,7 @@ import { Link, Route } from 'react-router-dom'
 import { MagnitoodzList } from '../../../magnitoodz'
 import { Magnitood } from '../../../magnitoodz'
 import { IComparison } from '../../../../../shared/interfaces/comparison'
+import 'tachyons/css/tachyons.css'
 
 interface IProps {
     magnitood: IComparison
@@ -12,7 +13,7 @@ interface IProps {
 
 export const Container: React.SFC<IProps> = ({ magnitood, magnitoodz, requestMagnitood }) => {
     return (
-        <div>
+        <div className="ma3 bg-black">
             <Route exact path="/" render={() => {
                 return <MagnitoodzList magnitoodz={magnitoodz} />
             }} />
