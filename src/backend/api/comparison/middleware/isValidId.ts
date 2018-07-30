@@ -1,4 +1,4 @@
-import { IRequest, IResponse } from "../../../interfaces/express";
+import { IRequest, IResponse } from '../../../interfaces/express'
 
 export const isValidId = (req: IRequest, res: IResponse, next: Function) => {
     const { id } = req.params
