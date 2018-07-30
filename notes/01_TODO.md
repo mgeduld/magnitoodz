@@ -109,4 +109,6 @@ Users will be able to register, log in, and log out. Only logged-in users will b
     * [] get rid of all magin strings/numbers
     * [] join tables to return user data with magnitoodz
     * [] add limits and offset to list query + frontend
+    * [] refactor big magnitood component and others
+    * [] unit tests for front-end code
 

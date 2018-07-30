@@ -26,7 +26,7 @@ const renderSmallMagnitude = ({
         return [
             ...spans,
             <div>
-                <p>
+                <p className="b i">
                     {smallMagnitudeName && <span>{smallMagnitudeName} </span>}
                     <span>{smallMagnitude} </span>
                     {unit && <span>{unit}</span>}
@@ -110,26 +110,28 @@ class Magnitood extends React.Component<IProps> {
             const bigMagnitudeChunkSize = bigMagnitude / maxChunks
             const startingSmallComparisonChunkSize = getStartingSmallComparisonChunkSize({ smallMagnitude, bigMagnitude, bigMagnitudeChunkSize, maxChunks })
             return (
-                <div className='white'>
+                <div className='w-60'>
                     {title && <h2>{title}</h2>}
                     {description && <p>{description}</p>}
-                    <p>
-                        {span_1_name && <span>{span_1_name} </span>}
-                        <span>{span_1_magnitude} </span>
-                        {unit && <span>{unit}</span>}
-                    </p>
-                    <MagnitoodSpan
-                        chunks={maxChunks}
-                        color={colors[0]}
-                        highlightColor={colors[1]}
-                    />
-                    {renderSmallMagnitude({
-                        bigMagnitude: startingSmallComparisonChunkSize,
-                        smallMagnitude,
-                        smallMagnitudeName,
-                        maxChunks,
-                        unit
-                    })}
+                    <div className="ml3 mt4">
+                        <p className="b i">
+                            {span_1_name && <span >{span_1_name} </span>}
+                            <span>{span_1_magnitude} </span>
+                            {unit && <span>{unit}</span>}
+                        </p>
+                        <MagnitoodSpan
+                            chunks={maxChunks}
+                            color={colors[0]}
+                            highlightColor={colors[1]}
+                        />
+                        {renderSmallMagnitude({
+                            bigMagnitude: startingSmallComparisonChunkSize,
+                            smallMagnitude,
+                            smallMagnitudeName,
+                            maxChunks,
+                            unit
+                        })}
+                    </div>
                     <div className="mt5"><Link to="/">home</Link></div>
                 </div>
             )
