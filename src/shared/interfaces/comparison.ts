@@ -12,4 +12,5 @@ export interface IComparison {
     updated_at?: string
     unit?: string
     user_id?: number
+    user_name?: string
 }
