@@ -1,5 +1,6 @@
 export enum ActionType {
     storeMagnitoodz = 'storeMagnitoodz',
-    fetchMagnitoodz = 'fetchMagnitoodz',
+    storeMagnitood = 'storeMagnitood',
+    requestMagnitoodz = 'requesthMagnitoodz',
     requestMagnitood = 'requestMagnitood'
 }

@@ -1,7 +1,7 @@
 import { ActionType } from "../../enums/action-type";
 
-export const fetchMagnitoodz = () => ({
-    type: ActionType.fetchMagnitoodz
+export const requestMagnitoodz = () => ({
+    type: ActionType.requestMagnitoodz
 })
 
 export const requestMagnitood = (id) => ({

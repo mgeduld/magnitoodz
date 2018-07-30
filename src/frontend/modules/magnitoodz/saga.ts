@@ -10,19 +10,19 @@ const fetchMagnitood = (id: number) => fetch(`${process.env.SERVER_ORIGIN}/api/v
     .then(res => res.json())
     .catch(error => console.log('Error fetching Magnitood', error))
 
-function* getAndPutMagnitoodz() {
+function* requestMagnitoodz() {
     const response = yield call(fetchMagnitoodz)
     yield put({ type: ActionType.storeMagnitoodz, data: response.data })
 }
 
 function* requestMagnitood(action: IAction) {
     const response = yield call(fetchMagnitood, action.id)
-    console.log(111, response)
+    yield put({ type: ActionType.storeMagnitood, data: response.data })
 }
 
 
 export function* saga() {
-    yield takeEvery(ActionType.fetchMagnitoodz, getAndPutMagnitoodz)
+    yield takeEvery(ActionType.requestMagnitoodz, requestMagnitoodz)
     yield takeEvery(ActionType.requestMagnitood, requestMagnitood)
 }
 

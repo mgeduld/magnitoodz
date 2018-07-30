@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import { IComparison } from '../../../shared/interfaces/comparison'
+import { IComparison } from '../../../../shared/interfaces/comparison'
 
 interface IProps {
     magnitoodz: IComparison[]
