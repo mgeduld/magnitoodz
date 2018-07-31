@@ -112,4 +112,5 @@ Users will be able to register, log in, and log out. Only logged-in users will b
     * [] refactor big magnitood component and others
     * [] unit tests for front-end code
     * [] make typescript play nice with recompose
+    * [] pagination
 
