@@ -86,7 +86,7 @@ Users will be able to register, log in, and log out. Only logged-in users will b
     * [x] list
     * [x] Magnitood
     * [*] about
-    * [] create
+    * [*] create
     * [] signup
     * [] login
     * [] create ability to log out
@@ -111,4 +111,5 @@ Users will be able to register, log in, and log out. Only logged-in users will b
     * [] add limits and offset to list query + frontend
     * [] refactor big magnitood component and others
     * [] unit tests for front-end code
+    * [] make typescript play nice with recompose
 

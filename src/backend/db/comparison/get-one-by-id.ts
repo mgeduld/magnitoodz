@@ -8,6 +8,6 @@ export const factory = (connection: IConnection) => (id: number): Promise<ICompa
     )
         .from('comparison AS c')
         .leftJoin('user AS u', 'u.id', 'c.user_id')
-        .where('u.id', id)
+        .where('c.id', id)
         .first()
 }
