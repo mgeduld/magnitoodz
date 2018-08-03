@@ -17,7 +17,8 @@ interface IProps {
   requestSignup: Function
   changeAuthenticationState: Function
   authenticationState: AuthenticationState
-  user_id: number
+  userId: number
+  userName: string
 }
 
 export const Container: React.SFC<IProps> = ({
@@ -30,7 +31,8 @@ export const Container: React.SFC<IProps> = ({
   requestSignup,
   authenticationState,
   changeAuthenticationState,
-  user_id
+  userId,
+  userName
 }) => {
   const onSubmitSignup = (credentials: ICredentials) => {
     requestSignup(credentials)
@@ -87,7 +89,6 @@ export const Container: React.SFC<IProps> = ({
                   href=""
                   onClick={(e) => {
                     e.preventDefault()
-                    console.log('requestLogOut')
                     requestLogOut()
                   }}
                 >
@@ -95,11 +96,18 @@ export const Container: React.SFC<IProps> = ({
                 </a>
               </span>
             )}
-            <span>
-              {' '}
-              | <Link to="/create">[+] New Magnitood</Link>
-            </span>
+            {userId !== undefined && (
+              <span>
+                {' '}
+                | <Link to="/create">[+] New Magnitood</Link>
+              </span>
+            )}
           </div>
+          {userId !== undefined && (
+            <div className="tc mt4">
+              <span>Hello, {userName}!</span>
+            </div>
+          )}
         </div>
         <div className="ma3 bg-black">
           <Route
@@ -126,7 +134,9 @@ export const Container: React.SFC<IProps> = ({
             exact
             path="/create"
             render={() => {
-              return <Editor onSubmitMagnitood={postMagnitood(magnitood)} />
+              return (
+                <Editor userId={userId} onSubmitMagnitood={postMagnitood} />
+              )
             }}
           />
           <Route

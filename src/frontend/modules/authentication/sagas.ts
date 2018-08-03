@@ -9,6 +9,7 @@ const origin: string = process.env.SERVER_ORIGIN
 const signupViaEndpoint = (credentials: ICredentials) =>
   fetch(`${origin}/api/v1/signup`, {
     method: 'POST',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -20,6 +21,7 @@ const signupViaEndpoint = (credentials: ICredentials) =>
 const logInViaEndpoint = (credentials: ICredentials) =>
   fetch(`${origin}/api/v1/login`, {
     method: 'POST',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -37,12 +39,13 @@ const logOutViaEndpoint = () => {
 }
 
 function* requestSignup(action: IAction) {
-  const response = yield call(signupViaEndpoint, action.credentials)
-  if (response.ok) {
+  const { ok, id, name } = yield call(signupViaEndpoint, action.credentials)
+  if (ok) {
     yield put({
+      id,
+      name,
       type: ActionType.changeAuthenticationState,
-      state: AuthenticationState.loggedIn,
-      id: response.id
+      state: AuthenticationState.loggedIn
     })
   } else {
     yield put({
@@ -61,12 +64,13 @@ function* requestLogOut() {
 }
 
 function* requestLogIn(action: IAction) {
-  const response = yield call(logInViaEndpoint, action.credentials)
-  if (response.ok) {
+  const { ok, id, name } = yield call(logInViaEndpoint, action.credentials)
+  if (ok) {
     yield put({
+      id,
+      name,
       type: ActionType.changeAuthenticationState,
-      state: AuthenticationState.loggedIn,
-      id: response.id
+      state: AuthenticationState.loggedIn
     })
   } else {
     yield put({

@@ -8,7 +8,12 @@ export const reducer = (
 ) => {
   switch (action.type) {
     case ActionType.changeAuthenticationState:
-      return { ...state, authenticationState: action.state, id: action.id }
+      return {
+        ...state,
+        authenticationState: action.state,
+        id: action.id,
+        userName: action.name
+      }
     default:
       return state
   }

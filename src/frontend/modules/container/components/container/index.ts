@@ -18,7 +18,8 @@ const mapStateToProps = ({ magnitoodz, magnitood, authentication }) => ({
   magnitood,
   magnitoodz,
   authenticationState: authentication.authenticationState,
-  userId: authentication.id
+  userId: authentication.id,
+  userName: authentication.userName
 })
 
 const mapDispatchToProps = (dispatch) => {
