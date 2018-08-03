@@ -19,6 +19,11 @@
     "url": "https://github.com/mgeduld/magnitoodz/issues"
   },
   "homepage": "https://github.com/mgeduld/magnitoodz#readme",
+  "ava": {
+    "files": [
+      "!/tests"
+    ]
+  },
   "nyc": {
     "extension": [
       ".jsx",

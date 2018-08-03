@@ -1,25 +1,26 @@
-import { all, call, put, takeEvery } from 'redux-saga/effects'
+import { call, put, takeEvery } from 'redux-saga/effects'
 import { ActionType } from '../../enums/action-type'
 import { IAction } from '../../interfaces/action'
 import { IComparison } from '../../../shared/interfaces/comparison'
 
-const fetchMagnitoodzFromEndpoint = () => fetch(`${process.env.SERVER_ORIGIN}/api/v1/`)
+const origin: string = process.env.SERVER_ORIGIN
+
+const fetchMagnitoodzFromEndpoint = () => fetch(`${origin}/api/v1/`)
     .then(res => res.json())
     .catch(error => console.log('Error fetching Magnitoodz', error))
 
-const fetchMagnitoodFromEndpoint = (id: number) => fetch(`${process.env.SERVER_ORIGIN}/api/v1/${id}`)
+const fetchMagnitoodFromEndpoint = (id: number) => fetch(`${origin}/api/v1/magnitood/${id}`)
     .then(res => res.json())
     .catch(error => console.log('Error fetching Magnitood', error))
 
-const postMagnitoodToEndpoint = (magnitood: IComparison) => fetch(`${process.env.SERVER_ORIGIN}/api/v1/`, {
+const postMagnitoodToEndpoint = (magnitood: IComparison) => fetch(`${origin}/api/v1/`, {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'
     },
     body: JSON.stringify(magnitood)
 
-})
-    .then(res => res.json())
+}).then(res => res.json())
     .catch(error => console.log('Error fetching Magnitood', error))
 
 function* requestMagnitoodz() {
@@ -36,7 +37,6 @@ function* postMagnitood(action: IAction) {
     yield call(postMagnitoodToEndpoint, action.magnitood)
     yield call(requestMagnitoodz)
 }
-
 
 export function* saga() {
     yield takeEvery(ActionType.requestMagnitoodz, requestMagnitoodz)

@@ -37,8 +37,8 @@ export const apiDoubleFactory = (request: object = {}) => {
     const api: IRestApi = {
         get(route: string, ...args: Function[]) { args[args.length - 1](request, response('get'), next('get')) },
         post(route: string, ...args: Function[]) { args[args.length - 1](request, response('post'), next('post')) },
-        put(route: string, ...args: Function[]) { args[args.length - 1](request, response('put'), next('put')) },
-        delete(route: string, ...args: Function[]) { args[args.length - 1](request, response('delete'), next('delete')) }
+        //put(route: string, ...args: Function[]) { args[args.length - 1](request, response('put'), next('put')) },
+        //delete(route: string, ...args: Function[]) { args[args.length - 1](request, response('delete'), next('delete')) }
     }
     return {
         api,

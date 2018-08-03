@@ -3,7 +3,7 @@ import { magnitood as magnitoodReducer } from './reducers/magnitood'
 import { magnitoodz as magnitoodzReducer } from './reducers/magnitoodz'
 import { MagnitoodzList as MagnitoodzListComponent } from './components/magnitoodz-list'
 import { MagnitoodWithRouter } from './components/magnitood'
-import { ComposedEditor } from './components/editor/'
+import { ComposedEditor } from './components/editor'
 
 export const saga = magnitoodzSaga
 export const magnitoodz = magnitoodzReducer

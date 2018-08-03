@@ -113,7 +113,7 @@ class Magnitood extends React.Component<IProps> {
             const bigMagnitudeChunkSize = bigMagnitude / maxChunks
             const startingSmallComparisonChunkSize = getStartingSmallComparisonChunkSize({ smallMagnitude, bigMagnitude, bigMagnitudeChunkSize, maxChunks })
             return (
-                <div className='w-60'>
+                <div className='w-100'>
                     {title && <h2>{title}</h2>}
                     <p>author: {user_name}</p>
                     {description && <p>{description}</p>}
@@ -136,7 +136,6 @@ class Magnitood extends React.Component<IProps> {
                             unit
                         })}
                     </div>
-                    <div className="mt5"><Link to="/">home</Link></div>
                 </div>
             )
 

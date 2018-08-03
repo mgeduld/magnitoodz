@@ -113,4 +113,8 @@ Users will be able to register, log in, and log out. Only logged-in users will b
     * [] unit tests for front-end code
     * [] make typescript play nice with recompose
     * [] pagination
+    * [] settle on one way to handle forms
+    * [] centralize validation
+    * [] display api catch errors to user
+    * [] make sure all modules only export from index (front/back)
 

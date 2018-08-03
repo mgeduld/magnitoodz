@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { alert, inputStyle } from '../../../../styles/constants'
 
 interface IProps {
     onSubmitMagnitood: Function
@@ -63,7 +64,6 @@ export const Editor: React.SFC<IProps> = ({
     updateErrors,
     history
 }) => {
-    const inputStyle = 'ba b--black bg-black white w-40'
     const getData = () => {
         const data: any = {
             // TODO: remove hard-coding and use actual user id
@@ -90,7 +90,7 @@ export const Editor: React.SFC<IProps> = ({
             <form className="ml4">
                 {
                     errors.length
-                        ? <div className="pa4 bg-red black">{errors.join(' ')}</div>
+                        ? <div className={alert}>{errors.join(' ')}</div>
                         : ''
                 }
                 <div className="mb2">

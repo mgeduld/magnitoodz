@@ -1,9 +1,6 @@
 {
-    "compilerOptions": {
-        "jsx": "preserve",
-        "lib": [
-            "ES6",
-            "DOM"
-        ]
-    }
+  "compilerOptions": {
+    "jsx": "preserve",
+    "lib": ["ES6", "DOM"]
+  }
 }

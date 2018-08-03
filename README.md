@@ -14,7 +14,7 @@ This app allows users to create comparisons (visualied as line charts) and view 
 
 ## Project status
 
-As you can see, the "artwork" and "design" is just roughed in. Currently, the code allows users to create and view comparisons (Manitoodz). That's about it for the front-end. On the back-end, I've coded an authentication system. The next step will be to write the front-end forms for signing up, logging in, and so on. The site won't be launched until that's in place, as I consider it necessary for a minuminum-viable product. 
+As you can see, the "artwork" and "design" is just roughed in. Currently, the code allows users to create and view comparisons (Manitoodz). That's about it for the front-end. On the back-end, I've coded an authentication system. The next step will be to write the front-end forms for signUpg up, logging in, and so on. The site won't be launched until that's in place, as I consider it necessary for a minuminum-viable product. 
 
 [Here is a detailed TODO list.](notes/01_TODO.md)
 

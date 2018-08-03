@@ -3,9 +3,9 @@ import { factory as getAllApiFactory } from './get-all'
 import { factory as getOneByIdFactory } from './get-one-by-id'
 import { factory as postOneFactory } from './post-one'
 import {
-    getAll as getAllQuery,
-    getOneById as getOneByIdQuery,
-    createOne as createOneQuery
+  getAll as getAllQuery,
+  getOneById as getOneByIdQuery,
+  createOne as createOneQuery
 } from '../../db/comparison'
 import { getOneById as getOneUserByIdQuery } from '../../db/user'
 
