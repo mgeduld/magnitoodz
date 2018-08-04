@@ -213,7 +213,6 @@ export const Editor: React.SFC<IProps> = ({
               } else {
                 updateErrors([])
                 const data = getData()
-                console.log('data', data)
                 onSubmitMagnitood(data)
                 history.push('/')
               }

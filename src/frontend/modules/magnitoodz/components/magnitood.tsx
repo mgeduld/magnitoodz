@@ -97,6 +97,8 @@ class Magnitood extends React.Component<IProps> {
       const smallMagnitude = Math.min(span_1_magnitude, span_2_magnitude)
       const smallMagnitudeName =
         smallMagnitude === span_1_magnitude ? span_1_name : span_2_name
+      const bugMagnitudeName =
+        smallMagnitude === span_1_magnitude ? span_2_name : span_1_name
       return (
         <div className="w-100">
           {title && <h2>{title}</h2>}
@@ -105,8 +107,8 @@ class Magnitood extends React.Component<IProps> {
           <div className="ml3 mt4">
             <div className="bg-near-black pa2">
               <p className="b i">
-                {span_1_name && <span>{span_1_name} </span>}
-                <span>{span_1_magnitude} </span>
+                {bugMagnitudeName && <span>{bugMagnitudeName} </span>}
+                <span>{bigMagnitude} </span>
                 {unit && <span>{unit}</span>}
               </p>
               <MagnitoodSpan
