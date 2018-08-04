@@ -29,6 +29,10 @@
       ".jsx",
       ".ts",
       ".tsx"
+    ],
+    "exclude": [
+      "**/*.test.ts",
+      "**/*/test/*"
     ]
   },
   "devDependencies": {

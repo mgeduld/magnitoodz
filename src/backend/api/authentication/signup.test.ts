@@ -34,10 +34,15 @@ test('api:authentication:signup triggers queries and then submits a response', a
 
   const { calledForMethod, calledWithArg } = await apiDouble.called()
   t.is(calledForMethod, 'post')
-  t.deepEqual(calledWithArg, { id: 123, message: 'Signed up', ok: true })
+  t.deepEqual(calledWithArg, {
+    id: 123,
+    name: 'Percy',
+    message: 'Signed up',
+    ok: true
+  })
 })
 
-test('api:authentication:signup triggers queries (with meta datat) and then submits a response', async (t: any) => {
+test('api:authentication:signup triggers queries (with meta data) and then submits a response', async (t: any) => {
   const apiDouble = apiDoubleFactory({
     app: {
       get: () => {}
@@ -68,7 +73,12 @@ test('api:authentication:signup triggers queries (with meta datat) and then subm
 
   const { calledForMethod, calledWithArg } = await apiDouble.called()
   t.is(calledForMethod, 'post')
-  t.deepEqual(calledWithArg, { id: 123, message: 'Signed up', ok: true })
+  t.deepEqual(calledWithArg, {
+    id: 123,
+    name: 'Percy',
+    message: 'Signed up',
+    ok: true
+  })
 })
 
 test('api:authentication:signup fails when a user already exists with same email or name', async (t: any) => {

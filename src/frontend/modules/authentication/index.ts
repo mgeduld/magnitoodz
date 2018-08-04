@@ -1,5 +1,5 @@
-import { ComposedSignup } from './components/signup/'
-import { ComposedLogin } from './components/login/'
+import { ComposedSignup } from './components/signup'
+import { ComposedLogin } from './components/login'
 import { saga as authenticationSaga } from './sagas'
 import { reducer } from './reducers'
 

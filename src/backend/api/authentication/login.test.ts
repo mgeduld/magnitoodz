@@ -15,6 +15,7 @@ test('api::authentication::login triggers queries and then submits a response', 
   })
   const getUserByEmailQueryDouble = queryDoubleFactory({
     id: 123,
+    name: 'Percy',
     email: 'percy@kittehqat.com',
     password: '$2b$10$9qRc4gXEcY697OBMvsxB4.tPfDdcWRmNj9BvoG5quV733U20GfObm'
   })
@@ -29,7 +30,12 @@ test('api::authentication::login triggers queries and then submits a response', 
 
   const { calledForMethod, calledWithArg } = await apiDouble.called()
   t.is(calledForMethod, 'post')
-  t.deepEqual(calledWithArg, { id: 123, message: 'Logged in', ok: true })
+  t.deepEqual(calledWithArg, {
+    id: 123,
+    name: 'Percy',
+    message: 'Logged in',
+    ok: true
+  })
 })
 
 test('api::authentication::login failed because no such user found', async (t: any) => {

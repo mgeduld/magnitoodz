@@ -1,7 +1,7 @@
 import { IRestApi, IRequest, IResponse } from '../../interfaces/express'
 import { isValidObject } from '../../utils/validation'
 import { ErrorMessage } from '../../enums/error-message'
-import { hasPermissions } from './middleware/hasPermssions'
+import { hasPermissions } from './middleware/has-permssions'
 
 const requiredFields = [
   'span_1_magnitude',
@@ -40,20 +40,16 @@ export const factory = (
     '/',
     hasPermissions,
     async ({ body }: IRequest, res: IResponse, next: Function) => {
-      console.log('B body', body)
       const { user_id } = body
       const user = await userQuery(user_id)
       if (!user) {
         next(new Error(`${ErrorMessage.invalidUserId}${user_id}`))
       } else {
         const comparison: Object | null = buildComparison(body)
-        console.log('B comparison', comparison)
         if (comparison) {
           await comparisonQuery(comparison)
-          console.log('B done')
           res.json({ ok: true })
         } else {
-          console.log('B error')
           next(new Error(`${ErrorMessage.invalidCriteria}${body}`))
         }
       }
