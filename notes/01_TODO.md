@@ -153,4 +153,6 @@ Users will be able to register, log in, and log out. Only logged-in users will b
   - [] format numbers for display (commas)
   - [] make sure all modules only export from index (front/back)
   - [] remove repo, clone, try re-init
+  - [] add descriptions to all test assertions in tests with multiple assertions
+  - [] fix indents and prettier
   - [] deploy

@@ -112,3 +112,32 @@ test('api::authentication::login failed because password does not match', async 
   t.is(calledForMethod, 'post')
   t.deepEqual(nextCalledWith, new Error(ErrorMessage.invalidCredentials))
 })
+
+test('api::authentication::login succeeds because password matches', async (t: any) => {
+  const apiDouble = apiDoubleFactory({
+    app: {
+      get: () => {}
+    },
+    body: {
+      email: 'percy@kittehqat.com',
+      password: 'sausageNum1!'
+    }
+  })
+  const getUserByEmailQueryDouble = queryDoubleFactory({
+    email: 'percy@kittehqat.com',
+    name: 'Percy',
+    password: 'sausageNum1!'
+  })
+
+  const login = factory(apiDouble.api, getUserByEmailQueryDouble.query)
+  t.truthy(typeof login === 'function')
+
+  await login()
+
+  const getUserByEmailQueryWasCalled = await getUserByEmailQueryDouble.wasCalled()
+  t.truthy(getUserByEmailQueryWasCalled)
+
+  const { calledForMethod, nextCalledWith } = await apiDouble.called()
+  t.is(calledForMethod, 'post')
+  t.deepEqual(nextCalledWith, new Error(ErrorMessage.invalidCredentials))
+})
