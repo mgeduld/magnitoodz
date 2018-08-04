@@ -81,6 +81,7 @@ export const apiDoubleFactory = (request: object = {}) => {
  */
 export const queryDoubleFactory = (response?: any) => {
   let called = false
+  let calledWith
   return {
     wasCalled(): Promise<any> {
       return new Promise((resolve) => {
@@ -91,14 +92,15 @@ export const queryDoubleFactory = (response?: any) => {
             clearInterval(id)
           }
           if (called) {
-            resolve(true)
+            resolve(calledWith || true)
             clearInterval(id)
           }
         }, 50)
       })
     },
-    query(): Promise<any> {
+    query(...args): Promise<any> {
       called = true
+      calledWith = args
       return Promise.resolve(response)
     }
   }

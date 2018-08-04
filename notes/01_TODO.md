@@ -155,4 +155,5 @@ Users will be able to register, log in, and log out. Only logged-in users will b
   - [] remove repo, clone, try re-init
   - [] add descriptions to all test assertions in tests with multiple assertions
   - [] fix indents and prettier
+  - [] convert all components to SFC
   - [] deploy
