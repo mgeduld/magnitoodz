@@ -134,6 +134,7 @@ Users will be able to register, log in, and log out. Only logged-in users will b
   - [] header
 - Misc
   - [] make magnitood title required!
+  - [] make more examples for seeding
   - [] switch to oAuth
   - [] change password email
   - [] account notify email
