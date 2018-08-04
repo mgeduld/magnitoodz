@@ -25,7 +25,7 @@ const renderSmallMagnitude = ({
   if (smallMagnitude >= chunkSize) {
     return [
       ...spans,
-      <div key={key}>
+      <div className="mt3 mb0 bg-dark-gray pa2" key={key}>
         <p className="b i">
           {smallMagnitudeName && <span>{smallMagnitudeName} </span>}
           <span>{smallMagnitude} </span>
@@ -36,13 +36,6 @@ const renderSmallMagnitude = ({
           last={hasFractionalPart ? FinalChunk.dim : FinalChunk.normal}
           color={currentColor}
         />
-        <p>
-          <span> One dash (</span>
-          <span className={currentColor}>-</span>
-          <span>
-            ) = {Math.round(smallMagnitude / wholeNumChunks)} {unit ? unit : ''}
-          </span>
-        </p>
       </div>
     ]
   }
@@ -57,6 +50,8 @@ const renderSmallMagnitude = ({
       comparisonColor="white"
       bigMagnituteColor={currentColor}
       smallMagnitudeColor={nextColor}
+      smallMagnitude={smallMagnitude}
+      smallMagnitudeChunkSize={bigMagnitude / maxChunks / maxChunks}
     />
   ]
   return renderSmallMagnitude({
@@ -76,16 +71,6 @@ interface IProps {
   onInit: Function
 }
 
-/*
-Unfortunately for those of us who prefer functional components,
-this one needs to be a class, because it has to access its props
-in componentDidMount.
-
-We can use recompose to add a componentDidMount method to a functional
-component, but it won't have acces to props. :-(
-
-TODO: figure out if there's a better way!
-*/
 class Magnitood extends React.Component<IProps> {
   constructor(props) {
     super(props)
@@ -112,23 +97,35 @@ class Magnitood extends React.Component<IProps> {
       const smallMagnitude = Math.min(span_1_magnitude, span_2_magnitude)
       const smallMagnitudeName =
         smallMagnitude === span_1_magnitude ? span_1_name : span_2_name
-      const bigMagnitudeChunkSize = bigMagnitude / maxChunks
       return (
         <div className="w-100">
           {title && <h2>{title}</h2>}
           <p>author: {user_name}</p>
           {description && <p>{description}</p>}
           <div className="ml3 mt4">
-            <p className="b i">
-              {span_1_name && <span>{span_1_name} </span>}
-              <span>{span_1_magnitude} </span>
-              {unit && <span>{unit}</span>}
-            </p>
-            <MagnitoodSpan
-              chunks={maxChunks}
-              color={colors[0]}
-              highlightColor={colors[1]}
-            />
+            <div className="bg-dark-gray pa2">
+              <p className="b i">
+                {span_1_name && <span>{span_1_name} </span>}
+                <span>{span_1_magnitude} </span>
+                {unit && <span>{unit}</span>}
+              </p>
+              <MagnitoodSpan
+                chunks={maxChunks}
+                color={colors[0]}
+                highlightColor={colors[1]}
+              />
+            </div>
+            {smallMagnitude < bigMagnitude / maxChunks && (
+              <p className="ml5 mb0">
+                - equals {(bigMagnitude / maxChunks).toFixed(2)} {unit && unit}
+                <br />
+                <span className="mid-gray b">|</span>
+                <br />
+                <span className="mid-gray b">| magnified x 100</span>
+                <br />
+                <span className="mid-gray b">|</span>
+              </p>
+            )}
             {renderSmallMagnitude({
               smallMagnitude,
               smallMagnitudeName,

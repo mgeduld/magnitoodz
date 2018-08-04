@@ -53,7 +53,7 @@ export const Container: React.SFC<IProps> = ({
 
   return (
     <div>
-      <div className="ml4 w-60">
+      <div className="ml4 w-70">
         <div className="dark-green">
           <p>
             Magnitoodz lets you compare sizes, distances, timespans and other

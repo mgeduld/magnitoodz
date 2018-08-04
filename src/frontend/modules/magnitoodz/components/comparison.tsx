@@ -12,6 +12,8 @@ interface IProps {
   bigMagnituteColor?: string
   smallMagnitudeColor?: string
   index?: number
+  smallMagnitudeChunkSize: number
+  smallMagnitude: number
 }
 
 export const Comparison: React.SFC<IProps> = ({
@@ -21,23 +23,34 @@ export const Comparison: React.SFC<IProps> = ({
   comparisonColor = 'white',
   bigMagnituteColor = 'red',
   smallMagnitudeColor = 'green',
-  index = 0
+  index = 0,
+  smallMagnitude,
+  smallMagnitudeChunkSize
 }) => {
+  const showMagnification = smallMagnitude < smallMagnitudeChunkSize
   return (
-    <div className="ma4" key={index}>
-      <div>
-        <span className={comparisonColor}>One dash (</span>
-        <span className={bigMagnituteColor}>{Runes.chunk}</span>
-        <span className={comparisonColor}>
-          ) above equals {bigChunkSize} {unit && `${unit} `}or{' '}
-        </span>
+    <div className="ml4 mt0 mb0" key={index}>
+      <div className="mid-gray">
+        |{range(chunks - 2).map((chunk) => Runes.chunk)}|
       </div>
-      <div>
-        <span className={bigMagnituteColor}>{Runes.chunk}</span>
-        <span className={comparisonColor}> = </span>
+      <div className="mt0 mb0">
         <span className={smallMagnitudeColor}>
           {range(chunks).map((chunk) => Runes.chunk)}
         </span>
+        <br />
+        <p className="ml4 mb0 bt0">
+          <span className={smallMagnitudeColor}>-</span> equals{' '}
+          {(bigChunkSize / 100).toFixed(2)}
+        </p>
+        {showMagnification && (
+          <p className="ml4 mt0 mb0 bt0">
+            <span className="mid-gray b">|</span>
+            <br />
+            <span className="mid-gray b">| magnified x 100</span>
+            <br />
+            <span className="mid-gray b">|</span>
+          </p>
+        )}
       </div>
     </div>
   )
