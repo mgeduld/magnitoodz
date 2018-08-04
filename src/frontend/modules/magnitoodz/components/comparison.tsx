@@ -40,7 +40,7 @@ export const Comparison: React.SFC<IProps> = ({
         <br />
         <p className="ml4 mb0 bt0">
           <span className={smallMagnitudeColor}>-</span> equals{' '}
-          {(bigChunkSize / 100).toFixed(2)}
+          {(bigChunkSize / 100).toFixed(2)} {unit && unit}
         </p>
         {showMagnification && (
           <p className="ml4 mt0 mb0 bt0">

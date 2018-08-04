@@ -150,6 +150,7 @@ Users will be able to register, log in, and log out. Only logged-in users will b
   - [] centralize validation
   - [] centralize alert area
   - [] display api catch errors to user
+  - [] format numbers for display (commas)
   - [] make sure all modules only export from index (front/back)
   - [] remove repo, clone, try re-init
   - [] deploy

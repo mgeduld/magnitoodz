@@ -25,7 +25,7 @@ const renderSmallMagnitude = ({
   if (smallMagnitude >= chunkSize) {
     return [
       ...spans,
-      <div className="mt3 mb0 bg-dark-gray pa2" key={key}>
+      <div className="mt3 mb0 bg-near-black pa2" key={key}>
         <p className="b i">
           {smallMagnitudeName && <span>{smallMagnitudeName} </span>}
           <span>{smallMagnitude} </span>
@@ -103,7 +103,7 @@ class Magnitood extends React.Component<IProps> {
           <p>author: {user_name}</p>
           {description && <p>{description}</p>}
           <div className="ml3 mt4">
-            <div className="bg-dark-gray pa2">
+            <div className="bg-near-black pa2">
               <p className="b i">
                 {span_1_name && <span>{span_1_name} </span>}
                 <span>{span_1_magnitude} </span>
