@@ -3,8 +3,14 @@ import { IComparison } from '../../../shared/interfaces/comparison'
 import { IAction } from '../../interfaces/action'
 import { ICredentials } from '../../../shared/interfaces/authentication'
 import { AuthenticationState } from '../../enums/authentication'
+import { itemsPerPage } from '../../components/ui'
 
-export const requestMagnitoodz = (): IAction => ({
+export const requestMagnitoodz = (
+  offset = 0,
+  limit = itemsPerPage
+): IAction => ({
+  limit,
+  offset,
   type: ActionType.requestMagnitoodz
 })
 

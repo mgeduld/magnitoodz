@@ -133,6 +133,7 @@ Users will be able to register, log in, and log out. Only logged-in users will b
   - [] general
   - [] header
 - Misc
+  - [] make magnitood title required!
   - [] switch to oAuth
   - [] change password email
   - [] account notify email

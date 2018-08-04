@@ -6,13 +6,16 @@ import { Login, Signup } from '../../../authentication'
 import { IComparison } from '../../../../../shared/interfaces/comparison'
 import { AuthenticationState } from '../../../../enums/authentication'
 import { ICredentials } from '../../../../../shared/interfaces/authentication'
+import { requestMagnitoodz } from '../../action-creators'
 
 interface IProps {
   magnitood: IComparison
   magnitoodz: IComparison[]
+  magnitoodzCount: number
   requestLogIn: Function
   requestLogOut: Function
   requestMagnitood: Function
+  requestMagnitoodz: Function
   postMagnitood: Function
   requestSignup: Function
   changeAuthenticationState: Function
@@ -24,9 +27,11 @@ interface IProps {
 export const Container: React.SFC<IProps> = ({
   magnitood,
   magnitoodz,
+  magnitoodzCount,
   requestLogIn,
   requestLogOut,
   requestMagnitood,
+  requestMagnitoodz,
   postMagnitood,
   requestSignup,
   authenticationState,
@@ -114,7 +119,13 @@ export const Container: React.SFC<IProps> = ({
             exact
             path="/"
             render={() => {
-              return <MagnitoodzList magnitoodz={magnitoodz} />
+              return (
+                <MagnitoodzList
+                  magnitoodz={magnitoodz}
+                  count={magnitoodzCount}
+                  requestMagnitoodz={requestMagnitoodz}
+                />
+              )
             }}
           />
           <Route

@@ -16,7 +16,8 @@ import {
 
 const mapStateToProps = ({ magnitoodz, magnitood, authentication }) => ({
   magnitood,
-  magnitoodz,
+  magnitoodz: magnitoodz.magnitoodz,
+  magnitoodzCount: magnitoodz.count,
   authenticationState: authentication.authenticationState,
   userId: authentication.id,
   userName: authentication.userName
@@ -28,6 +29,7 @@ const mapDispatchToProps = (dispatch) => {
       requestLogIn,
       requestLogOut,
       requestMagnitood,
+      requestMagnitoodz,
       postMagnitood,
       requestSignup,
       changeAuthenticationState,

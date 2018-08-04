@@ -2,11 +2,14 @@ import { call, put, takeEvery } from 'redux-saga/effects'
 import { ActionType } from '../../enums/action-type'
 import { IAction } from '../../interfaces/action'
 import { IComparison } from '../../../shared/interfaces/comparison'
+import { itemsPerPage } from '../../components/ui'
 
 const origin: string = process.env.SERVER_ORIGIN
 
-const fetchMagnitoodzFromEndpoint = () =>
-  fetch(`${origin}/api/v1/`, { credentials: 'include' })
+const fetchMagnitoodzFromEndpoint = (offset = 0, limit = itemsPerPage) =>
+  fetch(`${origin}/api/v1/?offset=${offset}&limit=${limit}`, {
+    credentials: 'include'
+  })
     .then((res) => res.json())
     .catch((error) => console.log('Error fetching Magnitoodz', error))
 
@@ -27,9 +30,13 @@ const postMagnitoodToEndpoint = (magnitood: IComparison) =>
     .then((res) => res.json())
     .catch((error) => console.log('Error fetching Magnitood', error))
 
-function* requestMagnitoodz() {
-  const response = yield call(fetchMagnitoodzFromEndpoint)
-  yield put({ type: ActionType.storeMagnitoodz, data: response.data })
+function* requestMagnitoodz(action: IAction) {
+  const response = yield call(
+    fetchMagnitoodzFromEndpoint,
+    action.offset,
+    action.limit
+  )
+  yield put({ type: ActionType.storeMagnitoodz, data: response })
 }
 
 function* requestMagnitood(action: IAction) {
@@ -39,7 +46,7 @@ function* requestMagnitood(action: IAction) {
 
 function* postMagnitood(action: IAction) {
   yield call(postMagnitoodToEndpoint, action.magnitood)
-  yield call(requestMagnitoodz)
+  yield call(requestMagnitoodz, action)
 }
 
 export function* saga() {
