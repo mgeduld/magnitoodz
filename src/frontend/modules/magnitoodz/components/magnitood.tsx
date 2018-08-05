@@ -28,7 +28,7 @@ const renderSmallMagnitude = ({
       <div className="mt3 mb0 bg-near-black pa2" key={key}>
         <p className="b i">
           {smallMagnitudeName && <span>{smallMagnitudeName} </span>}
-          <span>{smallMagnitude} </span>
+          <span>{smallMagnitude.toLocaleString()} </span>
           {unit && <span>{unit}</span>}
         </p>
         <MagnitoodSpan
@@ -108,7 +108,7 @@ class Magnitood extends React.Component<IProps> {
             <div className="bg-near-black pa2">
               <p className="b i">
                 {bugMagnitudeName && <span>{bugMagnitudeName} </span>}
-                <span>{bigMagnitude} </span>
+                <span>{bigMagnitude.toLocaleString()} </span>
                 {unit && <span>{unit}</span>}
               </p>
               <MagnitoodSpan
@@ -119,7 +119,8 @@ class Magnitood extends React.Component<IProps> {
             </div>
             {smallMagnitude < bigMagnitude / maxChunks && (
               <p className="ml5 mb0">
-                - equals {(bigMagnitude / maxChunks).toFixed(2)} {unit && unit}
+                - equals {(bigMagnitude / maxChunks).toLocaleString()}{' '}
+                {unit && unit}
                 <br />
                 <span className="mid-gray b">|</span>
                 <br />
