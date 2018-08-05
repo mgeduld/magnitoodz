@@ -47,7 +47,7 @@ export const MagnitoodSpan: React.SFC<IProps> = ({
   highlightColor = 'red'
 }) => {
   return (
-    <div>
+    <div className="mb0 mt0">
       {makeSpanElements({ chunks, last, color, highlightColor, dimColor })}
     </div>
   )

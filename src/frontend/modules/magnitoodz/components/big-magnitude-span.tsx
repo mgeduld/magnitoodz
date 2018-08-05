@@ -18,7 +18,7 @@ export const BigMagnitudeSpan: React.SFC<IProps> = ({
   colors
 }) => {
   return (
-    <div className="bg-near-black pa2">
+    <div className="bg-near-black pa2 mb0">
       <SpanLabel
         magnitude={bigMagnitude}
         magnitudeName={bigMagnitudeName}

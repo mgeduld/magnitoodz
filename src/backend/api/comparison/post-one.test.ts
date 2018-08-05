@@ -20,19 +20,19 @@ test('api:comparison:postOne triggers queries and then submits a response', asyn
     userQueryDouble.query,
     comparisonQueryDouble.query
   )
-  t.truthy(typeof postOne === 'function')
+  t.truthy(typeof postOne === 'function', 'returned a function')
 
   await postOne()
 
   const userQueryWasCalled = await userQueryDouble.wasCalled()
-  t.truthy(userQueryWasCalled)
+  t.truthy(userQueryWasCalled, 'first query was called')
 
   const comparisonQueryWasCalled = await comparisonQueryDouble.wasCalled()
-  t.truthy(comparisonQueryWasCalled)
+  t.truthy(comparisonQueryWasCalled, 'second query was called')
 
   const { calledForMethod, calledWithArg } = await apiDouble.called()
-  t.is(calledForMethod, 'post')
-  t.deepEqual(calledWithArg, { ok: true })
+  t.is(calledForMethod, 'post', 'post method used')
+  t.deepEqual(calledWithArg, { ok: true }, 'responded as expected')
 })
 
 test('api:comparison:postOne fails due to bad userId', async (t: any) => {
@@ -52,22 +52,22 @@ test('api:comparison:postOne fails due to bad userId', async (t: any) => {
     userQueryDouble.query,
     comparisonQueryDouble.query
   )
-  t.truthy(typeof postOne === 'function')
 
   await postOne()
 
   const userQueryWasCalled = await userQueryDouble.wasCalled()
-  t.truthy(userQueryWasCalled)
+  t.truthy(userQueryWasCalled, 'first query called')
 
   const comparisonQueryWasCalled = await comparisonQueryDouble.wasCalled()
-  t.falsy(comparisonQueryWasCalled)
+  t.falsy(comparisonQueryWasCalled, 'second query not called')
 
   const { calledForMethod, nextCalledWith } = await apiDouble.called()
-  t.is(calledForMethod, 'post')
+  t.is(calledForMethod, 'post', 'post method used')
   t.deepEqual(
     nextCalledWith,
     new Error(`${ErrorMessage.invalidUserId}NO SUCH USER`)
-  )
+  ),
+    'next called with error'
 })
 
 test('api:comparison:postOne fails due to bad criteria in body', async (t: any) => {
@@ -87,17 +87,18 @@ test('api:comparison:postOne fails due to bad criteria in body', async (t: any) 
     userQueryDouble.query,
     comparisonQueryDouble.query
   )
-  t.truthy(typeof postOne === 'function')
-
   await postOne()
 
   const userQueryWasCalled = await userQueryDouble.wasCalled()
-  t.truthy(userQueryWasCalled)
+  t.truthy(userQueryWasCalled, 'first query called')
 
   const comparisonQueryWasCalled = await comparisonQueryDouble.wasCalled()
-  t.falsy(comparisonQueryWasCalled)
+  t.falsy(comparisonQueryWasCalled, 'seconf query not called')
 
   const { calledForMethod, nextCalledWith } = await apiDouble.called()
-  t.is(calledForMethod, 'post')
-  t.truthy(nextCalledWith.message.match(ErrorMessage.invalidCriteria))
+  t.is(calledForMethod, 'post', 'post method used')
+  t.truthy(
+    nextCalledWith.message.match(ErrorMessage.invalidCriteria),
+    'next called with error'
+  )
 })

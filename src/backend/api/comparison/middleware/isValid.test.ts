@@ -13,7 +13,7 @@ test('comparison::middleware::isValidId makes sure param.id is a number', (t: an
       actual1 = value
     }
   )
-  t.is(actual1, undefined)
+  t.is(actual1, undefined, 'no error with 25')
 
   isValidId(
     { params: { id: '2' } },
@@ -23,7 +23,7 @@ test('comparison::middleware::isValidId makes sure param.id is a number', (t: an
     }
   )
 
-  t.is(actual1, undefined)
+  t.is(actual1, undefined, 'no error with "2"')
 
   isValidId(
     { params: { id: 'cat' } },
@@ -33,5 +33,5 @@ test('comparison::middleware::isValidId makes sure param.id is a number', (t: an
     }
   )
 
-  t.deepEqual(actual3, new Error('Invalid id cat'))
+  t.deepEqual(actual3, new Error('Invalid id cat'), 'error with "cat"')
 })

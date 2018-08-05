@@ -3,40 +3,44 @@ import { factory } from './login'
 import { apiDoubleFactory, queryDoubleFactory } from '../../test/api-fixtures'
 import { ErrorMessage } from '../../enums/error-message'
 
-test('api::authentication::login triggers queries and then submits a response', async (t: any) => {
-  const apiDouble = apiDoubleFactory({
-    app: {
-      get: () => {}
-    },
-    body: {
+test(
+  'api::authentication::login triggers queries and then submits a response',
+  async (t: any) => {
+    const apiDouble = apiDoubleFactory({
+      app: {
+        get: () => {}
+      },
+      body: {
+        email: 'percy@kittehqat.com',
+        password: 'sausageNum1!'
+      }
+    })
+    const getUserByEmailQueryDouble = queryDoubleFactory({
+      id: 123,
+      name: 'Percy',
       email: 'percy@kittehqat.com',
-      password: 'sausageNum1!'
-    }
-  })
-  const getUserByEmailQueryDouble = queryDoubleFactory({
-    id: 123,
-    name: 'Percy',
-    email: 'percy@kittehqat.com',
-    password: '$2b$10$9qRc4gXEcY697OBMvsxB4.tPfDdcWRmNj9BvoG5quV733U20GfObm'
-  })
+      password: '$2b$10$9qRc4gXEcY697OBMvsxB4.tPfDdcWRmNj9BvoG5quV733U20GfObm'
+    })
 
-  const login = factory(apiDouble.api, getUserByEmailQueryDouble.query)
-  t.truthy(typeof login === 'function')
+    const login = factory(apiDouble.api, getUserByEmailQueryDouble.query)
+    t.truthy(typeof login === 'function', 'returns a function')
 
-  await login()
+    await login()
 
-  const getUserByEmailQueryWasCalled = await getUserByEmailQueryDouble.wasCalled()
-  t.truthy(getUserByEmailQueryWasCalled)
+    const getUserByEmailQueryWasCalled = await getUserByEmailQueryDouble.wasCalled()
+    t.truthy(getUserByEmailQueryWasCalled, 'query was called')
 
-  const { calledForMethod, calledWithArg } = await apiDouble.called()
-  t.is(calledForMethod, 'post')
-  t.deepEqual(calledWithArg, {
-    id: 123,
-    name: 'Percy',
-    message: 'Logged in',
-    ok: true
-  })
-})
+    const { calledForMethod, calledWithArg } = await apiDouble.called()
+    t.is(calledForMethod, 'post', 'post method used')
+    t.deepEqual(calledWithArg, {
+      id: 123,
+      name: 'Percy',
+      message: 'Logged in',
+      ok: true
+    })
+  },
+  'responded as expected'
+)
 
 test('api::authentication::login failed because no such user found', async (t: any) => {
   const apiDouble = apiDoubleFactory({
@@ -51,16 +55,19 @@ test('api::authentication::login failed because no such user found', async (t: a
   const getUserByEmailQueryDouble = queryDoubleFactory()
 
   const login = factory(apiDouble.api, getUserByEmailQueryDouble.query)
-  t.truthy(typeof login === 'function')
 
   await login()
 
   const getUserByEmailQueryWasCalled = await getUserByEmailQueryDouble.wasCalled()
-  t.truthy(getUserByEmailQueryWasCalled)
+  t.truthy(getUserByEmailQueryWasCalled, 'query was called')
 
   const { calledForMethod, nextCalledWith } = await apiDouble.called()
-  t.is(calledForMethod, 'post')
-  t.deepEqual(nextCalledWith, new Error(ErrorMessage.invalidCredentials))
+  t.is(calledForMethod, 'post', 'post method used')
+  t.deepEqual(
+    nextCalledWith,
+    new Error(ErrorMessage.invalidCredentials),
+    'next called with invalidCredentials error'
+  )
 })
 
 test('api::authentication::login failed because bad credentials submitted', async (t: any) => {
@@ -76,16 +83,19 @@ test('api::authentication::login failed because bad credentials submitted', asyn
   const getUserByEmailQueryDouble = queryDoubleFactory()
 
   const login = factory(apiDouble.api, getUserByEmailQueryDouble.query)
-  t.truthy(typeof login === 'function')
 
   await login()
 
   const getUserByEmailQueryWasCalled = await getUserByEmailQueryDouble.wasCalled()
-  t.falsy(getUserByEmailQueryWasCalled)
+  t.falsy(getUserByEmailQueryWasCalled, 'query called')
 
   const { calledForMethod, nextCalledWith } = await apiDouble.called()
-  t.is(calledForMethod, 'post')
-  t.deepEqual(nextCalledWith, new Error(ErrorMessage.invalidCredentials))
+  t.is(calledForMethod, 'post', 'post method used')
+  t.deepEqual(
+    nextCalledWith,
+    new Error(ErrorMessage.invalidCredentials),
+    'next called with invalidCredentials error'
+  )
 })
 
 test('api::authentication::login failed because password does not match', async (t: any) => {
@@ -101,16 +111,19 @@ test('api::authentication::login failed because password does not match', async 
   const getUserByEmailQueryDouble = queryDoubleFactory()
 
   const login = factory(apiDouble.api, getUserByEmailQueryDouble.query)
-  t.truthy(typeof login === 'function')
 
   await login()
 
   const getUserByEmailQueryWasCalled = await getUserByEmailQueryDouble.wasCalled()
-  t.truthy(getUserByEmailQueryWasCalled)
+  t.truthy(getUserByEmailQueryWasCalled, 'query called')
 
   const { calledForMethod, nextCalledWith } = await apiDouble.called()
-  t.is(calledForMethod, 'post')
-  t.deepEqual(nextCalledWith, new Error(ErrorMessage.invalidCredentials))
+  t.is(calledForMethod, 'post', 'post method used')
+  t.deepEqual(
+    nextCalledWith,
+    new Error(ErrorMessage.invalidCredentials),
+    'next called with invalide credemtials arror'
+  )
 })
 
 test('api::authentication::login succeeds because password matches', async (t: any) => {
@@ -130,14 +143,17 @@ test('api::authentication::login succeeds because password matches', async (t: a
   })
 
   const login = factory(apiDouble.api, getUserByEmailQueryDouble.query)
-  t.truthy(typeof login === 'function')
 
   await login()
 
   const getUserByEmailQueryWasCalled = await getUserByEmailQueryDouble.wasCalled()
-  t.truthy(getUserByEmailQueryWasCalled)
+  t.truthy(getUserByEmailQueryWasCalled, 'query called')
 
   const { calledForMethod, nextCalledWith } = await apiDouble.called()
-  t.is(calledForMethod, 'post')
-  t.deepEqual(nextCalledWith, new Error(ErrorMessage.invalidCredentials))
+  t.is(calledForMethod, 'post', 'post method used')
+  t.deepEqual(
+    nextCalledWith,
+    new Error(ErrorMessage.invalidCredentials),
+    'next called with invalid credentials errror'
+  )
 })

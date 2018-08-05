@@ -12,10 +12,10 @@ export const SpanLabel: React.SFC<IProps> = ({
   unit
 }) => {
   return (
-    <p className="b i">
+    <div className="b i mb0 mt0">
       {magnitudeName && <span>{magnitudeName} </span>}
       <span>{magnitude.toLocaleString()} </span>
       {unit && <span>{unit}</span>}
-    </p>
+    </div>
   )
 }

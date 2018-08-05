@@ -17,7 +17,7 @@ test('api:comparison:getAll triggers a query with default offset and limit', asy
     countQueryDouble.query
   )
 
-  t.truthy(typeof getAll === 'function')
+  t.truthy(typeof getAll === 'function', 'returns a function')
 
   await getAll()
 
@@ -30,8 +30,12 @@ test('api:comparison:getAll triggers a query with default offset and limit', asy
   )
 
   const { calledForMethod, calledWithArg } = await apiDouble.called()
-  t.is(calledForMethod, 'get')
-  t.deepEqual(calledWithArg, { ok: true, data: 'foo', count: 6 })
+  t.is(calledForMethod, 'get', 'get method used')
+  t.deepEqual(
+    calledWithArg,
+    { ok: true, data: 'foo', count: 6 },
+    'responded as expected'
+  )
 })
 
 test('api:comparison:getAll triggers a query with custom offset and limit', async (t: any) => {
@@ -52,8 +56,6 @@ test('api:comparison:getAll triggers a query with custom offset and limit', asyn
     countQueryDouble.query
   )
 
-  t.truthy(typeof getAll === 'function')
-
   await getAll()
 
   const magnitoodzQueryResponse = await magnitoodzQueryDouble.wasCalled()
@@ -65,6 +67,10 @@ test('api:comparison:getAll triggers a query with custom offset and limit', asyn
   )
 
   const { calledForMethod, calledWithArg } = await apiDouble.called()
-  t.is(calledForMethod, 'get')
-  t.deepEqual(calledWithArg, { ok: true, data: 'foo', count: 6 })
+  t.is(calledForMethod, 'get', 'get method used')
+  t.deepEqual(
+    calledWithArg,
+    { ok: true, data: 'foo', count: 6 },
+    'responded as expected'
+  )
 })

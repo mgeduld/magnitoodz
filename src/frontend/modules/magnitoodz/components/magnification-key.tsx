@@ -3,6 +3,7 @@ import { DashTranslation } from './dash-translation'
 import { SpanConnector } from './span-connector'
 
 interface IProps {
+  classes?: string
   bigMagnitude: number
   maxChunks: number
   unit?: string
@@ -11,19 +12,17 @@ interface IProps {
 }
 
 export const MagnificationKey: React.SFC<IProps> = ({
+  classes,
   bigMagnitude,
   maxChunks,
   unit,
   color = 'white',
   showMagnification = true
 }) => {
+  const resolvedClasses = classes ? classes : 'ml5 mb0'
   return (
-    <div className="ml5 mb0">
-      <DashTranslation
-        color={color}
-        chunkSize={bigMagnitude / maxChunks}
-        unit={unit}
-      />
+    <div className={resolvedClasses}>
+      <DashTranslation color={color} chunkSize={bigMagnitude} unit={unit} />
       {showMagnification && <SpanConnector />}
     </div>
   )

@@ -6,7 +6,6 @@ import { Runes } from '../enums/runes'
 interface IProps {
   maxChunks: number
   bigChunkSize: number
-  smallChunkSize: number
   unit?: string
   smallMagnitudeColor?: string
   index?: number
@@ -25,10 +24,10 @@ export const Comparison: React.SFC<IProps> = ({
 }) => {
   const showMagnification = smallMagnitude < smallMagnitudeChunkSize
   return (
-    <div className="mt0 mb0" key={index}>
+    <div className="mt0 mb0 ml4" key={index}>
       <div className="mid-gray">
         {Runes.head}
-        {getChunks(maxChunks)}
+        {getChunks(maxChunks - 2)}
         {Runes.tail}
       </div>
       <div className="mt0 mb0">

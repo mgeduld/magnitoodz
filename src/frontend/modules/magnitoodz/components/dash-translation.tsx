@@ -12,12 +12,14 @@ export const DashTranslation: React.SFC<IProps> = ({
   unit
 }) => {
   return (
-    <span>
-      <span className={color}>-</span>
+    <div className="mt0 mb0 ml4">
       <span>
-        {' '}
-        equals {(chunkSize / 100).toLocaleString()} {unit && unit}{' '}
+        <span className={color}>-</span>
+        <span>
+          {' '}
+          equals {chunkSize.toLocaleString()} {unit && unit}{' '}
+        </span>
       </span>
-    </span>
+    </div>
   )
 }

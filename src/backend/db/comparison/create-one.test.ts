@@ -4,19 +4,14 @@ import { IConnection } from '../../interfaces/connection'
 
 test('db:comparison:createOne() makes a connection that returns a promise', async (t: any) => {
   let fnValue
-  const connection: IConnection = () => {
-    return {
-      insert() {
-        return {
-          then(fn: Function) {
-            fnValue = fn
-            fn([1])
-            return Promise.resolve('foo')
-          }
-        }
-      }
-    }
+  const then = (fn: Function) => {
+    fnValue = fn
+    fn([1])
+    return Promise.resolve('foo')
   }
+  const insert = () => ({ then })
+  const connection: IConnection = () => ({ insert })
+
   const createOne = factory(connection)
   t.truthy(typeof createOne === 'function', 'returns a function')
 

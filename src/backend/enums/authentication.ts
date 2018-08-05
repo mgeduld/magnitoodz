@@ -1,3 +1,3 @@
 export enum Authentication {
-    salt = 10
+  salt = 10
 }

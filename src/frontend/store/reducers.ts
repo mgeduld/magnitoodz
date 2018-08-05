@@ -3,7 +3,7 @@ import { magnitood, magnitoodz } from '../modules/magnitoodz'
 import { authenticationReducer as authentication } from '../modules/authentication'
 
 export const reducers = combineReducers({
-    authentication,
-    magnitood,
-    magnitoodz
+  authentication,
+  magnitood,
+  magnitoodz
 })

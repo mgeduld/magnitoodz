@@ -21,7 +21,6 @@ export const FinalSpan: React.SFC<IProps> = ({
   color
 }) => {
   const wholeNumChunks = getRoundedUpNumChunks(numChunks)
-
   return (
     <div className="mt3 mb0 bg-near-black pa2">
       <SpanLabel

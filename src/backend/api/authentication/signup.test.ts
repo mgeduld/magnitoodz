@@ -22,24 +22,28 @@ test('api:authentication:signup triggers queries and then submits a response', a
     getUserByEmailOrNameQueryDouble.query,
     createUserQueryDouble.query
   )
-  t.truthy(typeof signup === 'function')
+  t.truthy(typeof signup === 'function', 'returns a function')
 
   await signup()
 
   const getUserByEmailOrNameQueryWasCalled = await getUserByEmailOrNameQueryDouble.wasCalled()
-  t.truthy(getUserByEmailOrNameQueryWasCalled)
+  t.truthy(getUserByEmailOrNameQueryWasCalled, 'first query called')
 
   const createUserQueryWasCalled = await createUserQueryDouble.wasCalled()
-  t.truthy(createUserQueryWasCalled)
+  t.truthy(createUserQueryWasCalled, 'second query called')
 
   const { calledForMethod, calledWithArg } = await apiDouble.called()
-  t.is(calledForMethod, 'post')
-  t.deepEqual(calledWithArg, {
-    id: 123,
-    name: 'Percy',
-    message: 'Signed up',
-    ok: true
-  })
+  t.is(calledForMethod, 'post', 'post method used')
+  t.deepEqual(
+    calledWithArg,
+    {
+      id: 123,
+      name: 'Percy',
+      message: 'Signed up',
+      ok: true
+    },
+    'responses as expected'
+  )
 })
 
 test('api:authentication:signup triggers queries (with meta data) and then submits a response', async (t: any) => {
@@ -61,24 +65,27 @@ test('api:authentication:signup triggers queries (with meta data) and then submi
     getUserByEmailOrNameQueryDouble.query,
     createUserQueryDouble.query
   )
-  t.truthy(typeof signup === 'function')
 
   await signup()
 
   const getUserByEmailOrNameQueryWasCalled = await getUserByEmailOrNameQueryDouble.wasCalled()
-  t.truthy(getUserByEmailOrNameQueryWasCalled)
+  t.truthy(getUserByEmailOrNameQueryWasCalled, 'first query called')
 
   const createUserQueryWasCalled = await createUserQueryDouble.wasCalled()
-  t.truthy(createUserQueryWasCalled)
+  t.truthy(createUserQueryWasCalled, 'second query called')
 
   const { calledForMethod, calledWithArg } = await apiDouble.called()
-  t.is(calledForMethod, 'post')
-  t.deepEqual(calledWithArg, {
-    id: 123,
-    name: 'Percy',
-    message: 'Signed up',
-    ok: true
-  })
+  t.is(calledForMethod, 'post', 'post method used')
+  t.deepEqual(
+    calledWithArg,
+    {
+      id: 123,
+      name: 'Percy',
+      message: 'Signed up',
+      ok: true
+    },
+    'responsed as expected'
+  )
 })
 
 test('api:authentication:signup fails when a user already exists with same email or name', async (t: any) => {
@@ -100,19 +107,22 @@ test('api:authentication:signup fails when a user already exists with same email
     getUserByEmailOrNameQueryDouble.query,
     createUserQueryDouble.query
   )
-  t.truthy(typeof signup === 'function')
 
   await signup()
 
   const getUserByEmailOrNameQueryWasCalled = await getUserByEmailOrNameQueryDouble.wasCalled()
-  t.truthy(getUserByEmailOrNameQueryWasCalled)
+  t.truthy(getUserByEmailOrNameQueryWasCalled, 'first query called')
 
   const createUserQueryWasCalled = await createUserQueryDouble.wasCalled()
-  t.falsy(createUserQueryWasCalled)
+  t.falsy(createUserQueryWasCalled, 'second query not called')
 
   const { calledForMethod, nextCalledWith } = await apiDouble.called()
-  t.is(calledForMethod, 'post')
-  t.deepEqual(nextCalledWith, new Error(ErrorMessage.alreadyRegistered))
+  t.is(calledForMethod, 'post', 'used post method')
+  t.deepEqual(
+    nextCalledWith,
+    new Error(ErrorMessage.alreadyRegistered),
+    'next called with error'
+  )
 })
 
 test('api:authentication:signup fails credentials are invalid', async (t: any) => {
@@ -134,17 +144,20 @@ test('api:authentication:signup fails credentials are invalid', async (t: any) =
     getUserByEmailOrNameQueryDouble.query,
     createUserQueryDouble.query
   )
-  t.truthy(typeof signup === 'function')
 
   await signup()
 
   const getUserByEmailOrNameQueryWasCalled = await getUserByEmailOrNameQueryDouble.wasCalled()
-  t.falsy(getUserByEmailOrNameQueryWasCalled)
+  t.falsy(getUserByEmailOrNameQueryWasCalled, 'first query not called')
 
   const createUserQueryWasCalled = await createUserQueryDouble.wasCalled()
-  t.falsy(createUserQueryWasCalled)
+  t.falsy(createUserQueryWasCalled, 'second query not called')
 
   const { calledForMethod, nextCalledWith } = await apiDouble.called()
-  t.is(calledForMethod, 'post')
-  t.deepEqual(nextCalledWith, new Error(ErrorMessage.invalidCredentials))
+  t.is(calledForMethod, 'post', 'post method used')
+  t.deepEqual(
+    nextCalledWith,
+    new Error(ErrorMessage.invalidCredentials),
+    'next called with error'
+  )
 })
