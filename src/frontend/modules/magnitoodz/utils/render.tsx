@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Comparison, FinalSpan } from '../components'
-import { getSmallMagnitudeChunkSize, getSpanValues } from './spans'
-import { colors } from '../colors'
+import { getSmallMagnitudeChunkSize, getMagnitudes } from './spans'
+import { colors } from '../../../constants/colors'
 import { DashTranslation } from '../components/dash-translation'
 
 export const renderSmallMagnitude = ({
@@ -11,16 +11,16 @@ export const renderSmallMagnitude = ({
   maxChunks,
   unit
 }) => {
-  const spanValues = getSpanValues({ bigMagnitude, smallMagnitude, maxChunks })
-  const finalIndex = spanValues.length - 1
+  const magnitudes = getMagnitudes({ bigMagnitude, smallMagnitude, maxChunks })
+  const finalIndex = magnitudes.length - 1
   const noMagnificationLength = 2
-  return spanValues.map((chunkSize: number, index: number) => {
+  return magnitudes.map((chunkSize: number, index: number) => {
     if (index === finalIndex) {
       return (
         <FinalSpan
           key={index}
           color={
-            spanValues.length === noMagnificationLength
+            magnitudes.length === noMagnificationLength
               ? 'white'
               : colors[index]
           }
@@ -32,7 +32,7 @@ export const renderSmallMagnitude = ({
         />
       )
     }
-    return spanValues.length > noMagnificationLength ? (
+    return magnitudes.length > noMagnificationLength ? (
       <Comparison
         key={index}
         bigChunkSize={chunkSize}

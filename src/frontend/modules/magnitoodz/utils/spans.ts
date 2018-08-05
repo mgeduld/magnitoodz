@@ -2,7 +2,7 @@ import { range } from 'lodash'
 import { Runes } from '../enums/runes'
 import { ISpansInputValues } from '../../../interfaces/spans'
 
-export const getSpanValues = ({
+export const getMagnitudes = ({
   bigMagnitude,
   smallMagnitude,
   maxChunks,
@@ -14,7 +14,7 @@ export const getSpanValues = ({
 
   const newBigMagnitude = bigMagnitude / maxChunks
 
-  return getSpanValues({
+  return getMagnitudes({
     smallMagnitude,
     maxChunks,
     bigMagnitude: newBigMagnitude,
@@ -28,9 +28,6 @@ export const getSmallMagnitudeChunkSize = (
 ) => bigMagnitude / maxChunks / maxChunks
 
 export const hasFractionalPart = (value: number) => value % 1 !== 0
-
-export const getRoundedUpNumChunks = (value: number) =>
-  hasFractionalPart(value) ? Math.ceil(value) : value
 
 export const getChunks = (numChunks: number) => {
   return range(numChunks).map(() => Runes.chunk)

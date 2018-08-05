@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { IComparison } from '../../../../../shared/interfaces/comparison'
-import { colors } from '../../colors'
+import { colors } from '../../../../constants/colors'
 import { MagnificationKey } from '../magnification-key'
 import { getMagnitudesAndNames } from '../../utils/spans'
 import { BigMagnitudeSpan } from '../big-magnitude-span'
