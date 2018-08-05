@@ -2,34 +2,11 @@
 
 ## Goal
 
-V1 is a mimimum-viable product
-
 Magnitoodz allows users to visualize the differences between two sets of values. The primary use case is spans of time, e.g. the age of the Universe vs the age of the human species. But it can be used for other sorts of values, too, such as a comparison between the distances of Earth to the Moon and Earth to Mars. Each of these comparisons will be called a Magnitood.
 
 Each Magnitood will be displayed on its own "page" with its own unique url. Also displayed will be the name of the user who created it and some accompanying text, if it was specified at the time of creation.
 
 Users will be able to register, log in, and log out. Only logged-in users will be able to create Magnitoodz, but everyone will be able to see them.
-
-## Todo for later versions
-
-- dockerizing
-- deploying
-- password reset
-- signup confirmation
-- editing saved Magnitoodz
-- rating Magnitoodz
-- tagging Magnitoodz
-- comments?
-- embedding?
-- display list of popular Magnitoodz
-- display tag list
-- display Magnitoodz of as particular user
-- display latest Magnitoodz
-- display a random Magnitood
-- forward/back flip from Magnitood to Magnitood?
-- mobile
-- email a Magnitood?
-- favorites?
 
 ## Tasks
 
@@ -133,6 +110,7 @@ Users will be able to register, log in, and log out. Only logged-in users will b
   - [] general
   - [] header
 - Misc
+  - [] by author
   - [] make magnitood title required!
   - [] add validation to all forms and apis
   - [] make more examples for seeding
@@ -162,4 +140,11 @@ Users will be able to register, log in, and log out. Only logged-in users will b
   - [] convert all components to SFC
   - [] delete a magnitood (yours)
   - [] edit a magnitood (yours)
+  - [] display a random magnitood
+  - [] nav from magnitude to magnitude, slideshow style
+  - [] mobile
+  - [] email a Magnitood?
+  - [] favorites?
+  - [] comments?
+  - [] embedding?
   - [] deploy
