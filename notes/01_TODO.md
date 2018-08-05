@@ -110,7 +110,7 @@ Users will be able to register, log in, and log out. Only logged-in users will b
   - [] general
   - [] header
 - Misc
-  - [] by author
+  - [] sort by author
   - [] make magnitood title required!
   - [] add validation to all forms and apis
   - [] make more examples for seeding
@@ -124,7 +124,7 @@ Users will be able to register, log in, and log out. Only logged-in users will b
   - [] refactor big functions
   - [] get rid of all magic strings/numbers
   - [x] join tables to return user data with magnitoodz
-  - [] refactor big magnitood component and others
+  - [x] refactor big magnitood component and others
   - [] unit tests for front-end code
   - [] make typescript play nice with recompose
   - [] settle on one way to handle forms
@@ -133,11 +133,10 @@ Users will be able to register, log in, and log out. Only logged-in users will b
   - [] display api catch errors to user
   - [x] format numbers for display (commas)
   - [] make sure all modules only export from index (front/back)
-  - [] remove repo, clone, try re-init
   - [] add descriptions to all test assertions in tests with multiple assertions
   - [] fix indents and prettier
   - [] replace description textfield with text area (markdown?)
-  - [] convert all components to SFC
+  - [x] convert all components to SFC
   - [] delete a magnitood (yours)
   - [] edit a magnitood (yours)
   - [] display a random magnitood
@@ -148,3 +147,4 @@ Users will be able to register, log in, and log out. Only logged-in users will b
   - [] comments?
   - [] embedding?
   - [] deploy
+  - [] remove repo, clone, try re-init

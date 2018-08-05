@@ -6,7 +6,6 @@ import { Login, Signup } from '../../../authentication'
 import { IComparison } from '../../../../../shared/interfaces/comparison'
 import { AuthenticationState } from '../../../../enums/authentication'
 import { ICredentials } from '../../../../../shared/interfaces/authentication'
-import { requestMagnitoodz } from '../../action-creators'
 
 interface IProps {
   magnitood: IComparison
