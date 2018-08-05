@@ -1,6 +1,6 @@
 export enum Runes {
-    head = '|',
-    tail = '|',
-    chunk = '-',
-    equals = '='
+  head = '|',
+  tail = '|',
+  chunk = '-',
+  equals = '='
 }

@@ -1,15 +1,13 @@
 import * as React from 'react'
-import { range } from 'lodash'
+import { MagnificationKey } from './magnification-key'
+import { getChunks } from '../utils/spans'
 import { Runes } from '../enums/runes'
-import 'tachyons/css/tachyons.css'
 
 interface IProps {
-  chunks: number
+  maxChunks: number
   bigChunkSize: number
   smallChunkSize: number
   unit?: string
-  comparisonColor?: string
-  bigMagnituteColor?: string
   smallMagnitudeColor?: string
   index?: number
   smallMagnitudeChunkSize: number
@@ -17,11 +15,9 @@ interface IProps {
 }
 
 export const Comparison: React.SFC<IProps> = ({
-  chunks,
+  maxChunks,
   bigChunkSize,
   unit = '',
-  comparisonColor = 'white',
-  bigMagnituteColor = 'red',
   smallMagnitudeColor = 'green',
   index = 0,
   smallMagnitude,
@@ -29,28 +25,22 @@ export const Comparison: React.SFC<IProps> = ({
 }) => {
   const showMagnification = smallMagnitude < smallMagnitudeChunkSize
   return (
-    <div className="ml4 mt0 mb0" key={index}>
+    <div className="mt0 mb0" key={index}>
       <div className="mid-gray">
-        |{range(chunks - 2).map((chunk) => Runes.chunk)}|
+        {Runes.head}
+        {getChunks(maxChunks)}
+        {Runes.tail}
       </div>
       <div className="mt0 mb0">
-        <span className={smallMagnitudeColor}>
-          {range(chunks).map((chunk) => Runes.chunk)}
-        </span>
+        <span className={smallMagnitudeColor}>{getChunks(maxChunks)}</span>
         <br />
-        <p className="ml4 mb0 bt0">
-          <span className={smallMagnitudeColor}>-</span> equals{' '}
-          {(bigChunkSize / 100).toLocaleString()} {unit && unit}
-        </p>
-        {showMagnification && (
-          <p className="ml4 mt0 mb0 bt0">
-            <span className="mid-gray b">|</span>
-            <br />
-            <span className="mid-gray b">| magnified x 100</span>
-            <br />
-            <span className="mid-gray b">|</span>
-          </p>
-        )}
+        <MagnificationKey
+          showMagnification={showMagnification}
+          color={smallMagnitudeColor}
+          bigMagnitude={bigChunkSize}
+          maxChunks={maxChunks}
+          unit={unit}
+        />
       </div>
     </div>
   )

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { IComparison } from '../../../../shared/interfaces/comparison'
-import { PaginationNav } from '../../../components/index'
+import { PaginationNav } from '../../../components'
 import { pagesToDisplay, itemsPerPage } from '../../../components/ui'
 
 interface IProps {
