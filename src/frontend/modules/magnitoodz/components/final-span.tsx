@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { SpanLabel } from './span-label'
 import { MagnitoodSpan } from './magnitood-span'
-import { getRoundedUpNumChunks, hasFractionalPart } from '../utils/spans'
+import { hasFractionalPart } from '../utils/spans'
 import { FinalChunk } from '../enums/chunk'
 
 interface IProps {
