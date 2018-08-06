@@ -158,7 +158,6 @@ export const Editor: React.SFC<IProps> = ({
                 span1Magnitude,
                 span2Magnitude
               })
-              console.log(errors)
               if (errors.length) {
                 updateErrors(errors)
               } else {
