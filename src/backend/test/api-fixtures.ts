@@ -116,6 +116,36 @@ export const apiDoubleFactory = (request: object = {}) => {
   }
 }
 
+interface IQueryActivity {
+  called: boolean
+  calledWith: any
+}
+
+const runSimulationQuery = (
+  resolve: Function,
+  queryActivity: IQueryActivity
+) => {
+  let count = 0
+  const numCalls = 2
+  const callRate = 50
+  const id = setInterval(() => {
+    if ((count = count + 1) === numCalls) {
+      resolve(false)
+      clearInterval(id)
+    }
+    if (queryActivity.called) {
+      resolve(queryActivity.calledWith || true)
+      clearInterval(id)
+    }
+  }, callRate)
+}
+
+const wasCalled = (queryActivity: IQueryActivity) => (): Promise<any> => {
+  return new Promise((resolve) => {
+    runSimulationQuery(resolve, queryActivity)
+  })
+}
+
 /**
  * Used for doubling knex queries in tests
  *
@@ -132,30 +162,15 @@ export const apiDoubleFactory = (request: object = {}) => {
  * @param response response that comes back from the query
  */
 export const queryDoubleFactory = (response?: any) => {
-  let called = false
-  let calledWith
+  const queryActivity: IQueryActivity = {
+    called: false,
+    calledWith: undefined
+  }
   return {
-    wasCalled(): Promise<any> {
-      return new Promise((resolve) => {
-        let count = 0
-        const id = setInterval(() => {
-          console.log('count', count)
-          if ((count = count + 1) === 2) {
-            resolve(false)
-            clearInterval(id)
-          }
-          console.log('called', called)
-          if (called) {
-            resolve(calledWith || true)
-            clearInterval(id)
-          }
-        }, 50)
-      })
-    },
+    wasCalled: wasCalled(queryActivity),
     query(...args): Promise<any> {
-      called = true
-      calledWith = args
-      console.log('called', called)
+      queryActivity.called = true
+      queryActivity.calledWith = args
       return Promise.resolve(response)
     }
   }

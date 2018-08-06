@@ -3,10 +3,11 @@ import { factory } from './post-one'
 import { apiDoubleFactory, queryDoubleFactory } from '../../test/api-fixtures'
 import { ErrorMessage } from '../../enums/error-message'
 
-test.only('api:comparison:postOne triggers queries and then submits a response', async (t: any) => {
+test('api:comparison:postOne triggers queries and then submits a response', async (t: any) => {
   const apiDouble = apiDoubleFactory({
     body: {
       user_id: '2',
+      title: 'Cats vs Dogs',
       span_1_name: 'Foo',
       span_2_name: 'Bar',
       span_1_magnitude: 50,
@@ -27,8 +28,8 @@ test.only('api:comparison:postOne triggers queries and then submits a response',
   const userQueryWasCalled = await userQueryDouble.wasCalled()
   t.truthy(userQueryWasCalled, 'first query was called')
 
-  // const comparisonQueryWasCalled = await comparisonQueryDouble.wasCalled()
-  // t.truthy(comparisonQueryWasCalled, 'second query was called')
+  const comparisonQueryWasCalled = await comparisonQueryDouble.wasCalled()
+  t.truthy(comparisonQueryWasCalled, 'second query was called')
 
   const { calledForMethod, calledWithArg } = await apiDouble.called()
   t.is(calledForMethod, 'post', 'post method used')
