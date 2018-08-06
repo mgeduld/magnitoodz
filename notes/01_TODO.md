@@ -86,6 +86,17 @@ Users will be able to register, log in, and log out. Only logged-in users will b
   - [x] reducers
   - [x] action creators
   - [x] changes to parent compoents
+- [] Edit a magnitood
+  - [] conditionally display edit option (you're logged in and it's yours to edit)
+  - [] put values in editor
+  - [] send id to editor
+  - [] make editor dual/mode
+  - [] make submit dual/mode
+  - [] saga
+  - [] reducer
+  - [] changes to parent components
+  - [] query
+  - [] api
 - [] rating
   - [] table
   - [] rate query
@@ -117,6 +128,8 @@ Users will be able to register, log in, and log out. Only logged-in users will b
   - [x] format numbers for display (commas)
   - [x] convert all components to SFC
   - [x] add descriptions to all test assertions in tests with multiple assertions
+  - [] add fields for citations
+  - [] add banishment
   - [] sort by most recent
   - [] loader for all api calls
   - [] sort by author
