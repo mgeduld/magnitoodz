@@ -16,6 +16,7 @@ interface IProps {
   requestMagnitood: Function
   requestMagnitoodz: Function
   postMagnitood: Function
+  updateMagnitood: Function
   requestSignup: Function
   changeAuthenticationState: Function
   authenticationState: AuthenticationState
@@ -32,6 +33,7 @@ export const Container: React.SFC<IProps> = ({
   requestMagnitood,
   requestMagnitoodz,
   postMagnitood,
+  updateMagnitood,
   requestSignup,
   authenticationState,
   changeAuthenticationState,
@@ -135,6 +137,7 @@ export const Container: React.SFC<IProps> = ({
                 <Magnitood
                   magnitood={magnitood}
                   id={match.params.id}
+                  userId={userId}
                   onInit={requestMagnitood}
                 />
               )
@@ -145,7 +148,24 @@ export const Container: React.SFC<IProps> = ({
             path="/create"
             render={() => {
               return (
-                <Editor userId={userId} onSubmitMagnitood={postMagnitood} />
+                <Editor
+                  userId={userId}
+                  onUpdateMagnitood={updateMagnitood}
+                  onSubmitMagnitood={postMagnitood}
+                />
+              )
+            }}
+          />
+          <Route
+            exact
+            path="/update"
+            render={() => {
+              return (
+                <Editor
+                  userId={userId}
+                  magnitood={magnitood}
+                  onSubmitMagnitood={postMagnitood}
+                />
               )
             }}
           />

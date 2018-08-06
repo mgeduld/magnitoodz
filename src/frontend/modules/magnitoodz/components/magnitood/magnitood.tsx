@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Link } from 'react-router-dom'
 import { IComparison } from '../../../../../shared/interfaces/comparison'
 import { colors } from '../../../../constants/colors'
 import { MagnificationKey } from '../magnification-key'
@@ -11,6 +12,7 @@ interface IProps {
   id: number
   magnitood: IComparison
   onInit: Function
+  userId: number
 }
 
 export class Magnitood extends React.Component<IProps> {
@@ -32,6 +34,7 @@ export class Magnitood extends React.Component<IProps> {
         span_2_magnitude,
         unit,
         description,
+        user_id,
         user_name
       } = this.props.magnitood
       const {
@@ -48,9 +51,12 @@ export class Magnitood extends React.Component<IProps> {
 
       return (
         <div className="w-100">
-          {title && <h2>{title}</h2>}
+          <h2>{title}</h2>
           <p>author: {user_name}</p>
           {description && <p>{description}</p>}
+          <div className="tc">
+            {this.props.userId === user_id && <Link to="/update">edit</Link>}
+          </div>
           <div className="ml3 mt4 mb0">
             <BigMagnitudeSpan
               colors={colors}

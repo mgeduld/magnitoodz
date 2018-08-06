@@ -18,17 +18,24 @@ const fetchMagnitoodFromEndpoint = (id: number) =>
     .then((res) => res.json())
     .catch((error) => console.log('Error fetching Magnitood', error))
 
+const getPostConfig = (magnitood): RequestInit => ({
+  method: 'POST',
+  credentials: 'include',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(magnitood)
+})
+
 const postMagnitoodToEndpoint = (magnitood: IComparison) =>
-  fetch(`${origin}/api/v1/`, {
-    method: 'POST',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(magnitood)
-  })
+  fetch(`${origin}/api/v1/`, getPostConfig(magnitood))
     .then((res) => res.json())
-    .catch((error) => console.log('Error fetching Magnitood', error))
+    .catch((error) => console.log('Error posting Magnitood', error))
+
+const updateMagnitoodAtEndpoint = (magnitood: IComparison) =>
+  fetch(`${origin}/api/v1/update`, getPostConfig(magnitood))
+    .then((res) => res.json())
+    .catch((error) => console.log('Error updating Magnitood', error))
 
 function* requestMagnitoodz(action: IAction) {
   const response = yield call(
@@ -45,6 +52,11 @@ function* requestMagnitood(action: IAction) {
 }
 
 function* postMagnitood(action: IAction) {
+  yield call(updateMagnitoodAtEndpoint, action.magnitood)
+  yield call(requestMagnitoodz, action)
+}
+
+function* updateMagnitood(action: IAction) {
   yield call(postMagnitoodToEndpoint, action.magnitood)
   yield call(requestMagnitoodz, action)
 }
@@ -53,4 +65,5 @@ export function* saga() {
   yield takeEvery(ActionType.requestMagnitoodz, requestMagnitoodz)
   yield takeEvery(ActionType.requestMagnitood, requestMagnitood)
   yield takeEvery(ActionType.postMagnitood, postMagnitood)
+  yield takeEvery(ActionType.updateMagnitood, updateMagnitood)
 }

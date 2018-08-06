@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom'
 import { Container } from './container'
 import {
   postMagnitood,
+  updateMagnitood,
   requestLogIn,
   requestLogOut,
   requestMagnitood,
@@ -31,6 +32,7 @@ const mapDispatchToProps = (dispatch) => {
       requestMagnitood,
       requestMagnitoodz,
       postMagnitood,
+      updateMagnitood,
       requestSignup,
       changeAuthenticationState,
       componentDidMount: requestMagnitoodz

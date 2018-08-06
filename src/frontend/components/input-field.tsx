@@ -6,13 +6,20 @@ interface IProps {
   isPassword?: boolean
   placeholder: string
   updateFunction: Function
+  value?: any
+  dataCollector?: object
+  dataCollectorField?: string
 }
 
+/* tslint:disable ter-indent */
 export const InputField: React.SFC<IProps> = ({
   isPassword,
   label,
   placeholder,
-  updateFunction
+  updateFunction,
+  value,
+  dataCollector,
+  dataCollectorField
 }) => (
   <div>
     <label>
@@ -21,7 +28,19 @@ export const InputField: React.SFC<IProps> = ({
         className={inputStyle}
         type={isPassword ? 'password' : 'text'}
         placeholder={placeholder}
-        onChange={(e) => updateFunction(e.currentTarget.value)}
+        defaultValue={value || undefined}
+        ref={(el) => {
+          if (dataCollector && dataCollectorField) {
+            dataCollector[dataCollectorField] = el
+          }
+        }}
+        onChange={
+          dataCollector
+            ? undefined
+            : (e) => {
+                updateFunction(e.currentTarget.value)
+              }
+        }
       />
     </label>
   </div>

@@ -24,6 +24,11 @@ export const postMagnitood = (magnitood: IComparison): IAction => ({
   type: ActionType.postMagnitood
 })
 
+export const updateMagnitood = (magnitood: IComparison): IAction => ({
+  magnitood,
+  type: ActionType.updateMagnitood
+})
+
 export const requestSignup = (credentials: ICredentials) => ({
   credentials,
   type: ActionType.requestSignup

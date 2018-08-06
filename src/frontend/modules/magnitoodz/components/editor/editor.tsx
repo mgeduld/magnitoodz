@@ -7,6 +7,8 @@ import {
   isValidMagnitude
 } from '../../../../../shared/utils/validation'
 import { InputField } from '../../../../components/input-field'
+import { IComparison } from '../../../../../shared/interfaces/comparison'
+import { magnitood } from '../../reducers/magnitood'
 
 interface IProps {
   onSubmitMagnitood: Function
@@ -28,6 +30,7 @@ interface IProps {
   updateErrors: Function
   history: any
   userId: number
+  magnitood?: IComparison
 }
 
 const validate = ({
@@ -72,28 +75,55 @@ export const Editor: React.SFC<IProps> = ({
   updateUnit,
   updateErrors,
   history,
-  userId
+  userId,
+  magnitood = {}
 }) => {
+  // unfortunately, we can't automatically trigger the update functions,
+  // and if the user is updating an onld Magnitude, he may not
+  // update all fields. So we'll have to populate this object
+  // with refs
+  const dataCollectorForUpdates = {
+    title,
+    description,
+    span1Name,
+    span1Magnitude,
+    span2Name,
+    span2Magnitude,
+    unit
+  }
   const getData = () => {
     const data: any = {
-      title,
       user_id: userId,
-      span_1_name: span1Name,
-      span_2_name: span2Name,
-      span_1_magnitude: Number(span1Magnitude),
-      span_2_magnitude: Number(span2Magnitude)
+      title: magnitood ? dataCollectorForUpdates.title['value'] : title,
+      span_1_name: magnitood
+        ? dataCollectorForUpdates.span1Name['value']
+        : span1Name,
+      span_2_name: magnitood
+        ? dataCollectorForUpdates.span2Name['value']
+        : span2Name,
+      span_1_magnitude: magnitood
+        ? Number(dataCollectorForUpdates.span1Magnitude['value'])
+        : Number(span1Magnitude),
+      span_2_magnitude: magnitood
+        ? Number(dataCollectorForUpdates.span2Magnitude['value'])
+        : Number(span2Magnitude)
     }
-    if (description) {
-      data.description = description
+    if (description || dataCollectorForUpdates.description['value']) {
+      data.description = magnitood
+        ? dataCollectorForUpdates.description['value']
+        : description
     }
-    if (unit) {
-      data.unit = unit
+    if (unit || dataCollectorForUpdates.unit['value']) {
+      data.unit = magnitood ? dataCollectorForUpdates.unit['value'] : unit
+    }
+    if (magnitood) {
+      data.id = magnitood.id
     }
     return data
   }
   return (
     <div className="ml4">
-      <h2>New Magnitood</h2>
+      <h2>{magnitood ? 'Edit' : 'New'} Magnitood</h2>
       <form className="ml4">
         {errors.length ? <div className={alert}>{errors.join(' ')}</div> : ''}
         <div className="mb2">
@@ -101,6 +131,9 @@ export const Editor: React.SFC<IProps> = ({
             label="Title*"
             placeholder="Sequoias vs Humans"
             updateFunction={updateTitle}
+            value={magnitood.title}
+            dataCollector={dataCollectorForUpdates}
+            dataCollectorField={'title'}
           />
         </div>
         <div className="mb2">
@@ -108,6 +141,9 @@ export const Editor: React.SFC<IProps> = ({
             label="Description"
             placeholder="Sequoias live a long time compared to humans."
             updateFunction={updateDescription}
+            value={magnitood.description}
+            dataCollector={dataCollectorForUpdates}
+            dataCollectorField={'description'}
           />
         </div>
         <div className="mb2">
@@ -115,6 +151,9 @@ export const Editor: React.SFC<IProps> = ({
             label="Span 1 Name*"
             placeholder="Sequoias"
             updateFunction={updateSpan1Name}
+            value={magnitood.span_1_name}
+            dataCollector={dataCollectorForUpdates}
+            dataCollectorField={'span1Name'}
           />
         </div>
         <div className="mb2">
@@ -122,6 +161,9 @@ export const Editor: React.SFC<IProps> = ({
             label="Span 1 Magnitude*"
             placeholder="3000"
             updateFunction={updateSpan1Magnitude}
+            value={magnitood.span_1_magnitude}
+            dataCollector={dataCollectorForUpdates}
+            dataCollectorField={'span1Magnitude'}
           />
         </div>
         <div className="mb2">
@@ -129,6 +171,9 @@ export const Editor: React.SFC<IProps> = ({
             label="Span 2 Name*"
             placeholder="Humans"
             updateFunction={updateSpan2Name}
+            value={magnitood.span_2_name}
+            dataCollector={dataCollectorForUpdates}
+            dataCollectorField={'span2Name'}
           />
         </div>
         <div className="mb2">
@@ -136,6 +181,9 @@ export const Editor: React.SFC<IProps> = ({
             label="Span 2 Magnitude*"
             placeholder="80"
             updateFunction={updateSpan2Magnitude}
+            value={magnitood.span_2_magnitude}
+            dataCollector={dataCollectorForUpdates}
+            dataCollectorField={'span2Magnitude'}
           />
         </div>
         <div className="mb2">
@@ -143,6 +191,9 @@ export const Editor: React.SFC<IProps> = ({
             label="Units"
             placeholder="years"
             updateFunction={updateUnit}
+            value={magnitood.unit}
+            dataCollector={dataCollectorForUpdates}
+            dataCollectorField={'unit'}
           />
         </div>
         <p className="mb2 mt4">* required fields</p>
@@ -151,19 +202,30 @@ export const Editor: React.SFC<IProps> = ({
             href=""
             onClick={(e) => {
               e.preventDefault()
-              const errors = validate({
-                title,
-                span1Name,
-                span2Name,
-                span1Magnitude,
-                span2Magnitude
-              })
+              /* tslint:disable ter-indent */
+              const errors = magnitood
+                ? validate({
+                    title: dataCollectorForUpdates.title['value'],
+                    span1Name: dataCollectorForUpdates.span1Name['value'],
+                    span2Name: dataCollectorForUpdates.span2Name['value'],
+                    span1Magnitude:
+                      dataCollectorForUpdates.span1Magnitude['value'],
+                    span2Magnitude:
+                      dataCollectorForUpdates.span2Magnitude['value']
+                  })
+                : validate({
+                    title,
+                    span1Name,
+                    span2Name,
+                    span1Magnitude,
+                    span2Magnitude
+                  })
               if (errors.length) {
                 updateErrors(errors)
               } else {
                 updateErrors([])
                 const data = getData()
-                onSubmitMagnitood(data)
+                onSubmitMagnitood(data, !!magnitood)
                 history.push('/')
               }
             }}
