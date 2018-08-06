@@ -72,7 +72,7 @@ test('api:authentication:signup triggers queries (with meta data) and then submi
   t.truthy(getUserByEmailOrNameQueryWasCalled, 'first query called')
 
   const createUserQueryWasCalled = await createUserQueryDouble.wasCalled()
-  t.truthy(createUserQueryWasCalled, 'second query called')
+  t.truthy(!!createUserQueryWasCalled, 'second query called')
 
   const { calledForMethod, calledWithArg } = await apiDouble.called()
   t.is(calledForMethod, 'post', 'post method used')

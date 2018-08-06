@@ -62,8 +62,8 @@ Users will be able to register, log in, and log out. Only logged-in users will b
 - [x] make "pages"
   - [x] list
   - [x] Magnitood
-  - [*] about
-  - [*] create
+  - [x] about
+  - [x] create
   - [x] signup
   - [x] login
   - [x] create ability to log out
@@ -110,8 +110,16 @@ Users will be able to register, log in, and log out. Only logged-in users will b
   - [] general
   - [] header
 - Misc
+  - [x] make magnitood title required
+  - [x] refactor big functions
+  - [x] join tables to return user data with magnitoodz
+  - [x] refactor big magnitood component and others
+  - [x] format numbers for display (commas)
+  - [x] convert all components to SFC
+  - [x] add descriptions to all test assertions in tests with multiple assertions
+  - [] sort by most recent
+  - [] loader for all api calls
   - [] sort by author
-  - [] make magnitood title required!
   - [] add validation to all forms and apis
   - [] make more examples for seeding
   - [] switch to oAuth
@@ -121,22 +129,16 @@ Users will be able to register, log in, and log out. Only logged-in users will b
   - [] dockerize
   - [] finalize README
   - [] sort list by most recent
-  - [] refactor big functions
   - [] get rid of all magic strings/numbers
-  - [x] join tables to return user data with magnitoodz
-  - [x] refactor big magnitood component and others
-  - [] unit tests for front-end code
+  - [] unit tests for react code
   - [] make typescript play nice with recompose
   - [] settle on one way to handle forms
   - [] centralize validation
   - [] centralize alert area
   - [] display api catch errors to user
-  - [x] format numbers for display (commas)
   - [] make sure all modules only export from index (front/back)
-  - [] add descriptions to all test assertions in tests with multiple assertions
   - [] fix indents and prettier
   - [] replace description textfield with text area (markdown?)
-  - [x] convert all components to SFC
   - [] delete a magnitood (yours)
   - [] edit a magnitood (yours)
   - [] display a random magnitood

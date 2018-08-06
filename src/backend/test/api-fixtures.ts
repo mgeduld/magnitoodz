@@ -1,5 +1,74 @@
 import { IRestApi } from '../interfaces/express'
 
+interface IMethodConfig {
+  name: string
+  request: Object
+  response: Function
+  next: Function
+}
+
+interface IMethodActivity {
+  calledWithArg: any
+  calledForMethod: string
+}
+
+interface INextActivity {
+  nextCalledWith: any
+  calledForMethod: string
+}
+
+const getResponseFunction = (apiActtivity: IMethodActivity) => (
+  caller: string
+) => {
+  return {
+    json(value: any) {
+      apiActtivity.calledWithArg = value
+      apiActtivity.calledForMethod = caller
+    },
+    cookie() {}
+  }
+}
+
+const getNextFunction = (nextActivity: INextActivity) => (caller: string) => (
+  value: any
+) => {
+  nextActivity.nextCalledWith = value
+  nextActivity.calledForMethod = caller
+}
+
+const method = ({ name, request, response, next }: IMethodConfig) => (
+  route: string,
+  ...args: Function[]
+) => {
+  args[args.length - 1](request, response(name), next(name))
+}
+
+const runSimulationApi = (
+  methodActivity: IMethodActivity,
+  nextActivity: INextActivity,
+  resolve: Function
+) => {
+  const callRate = 50
+  const id = setInterval(() => {
+    const calledForMethod =
+      methodActivity.calledForMethod || nextActivity.calledForMethod
+    if (calledForMethod) {
+      resolve({
+        calledForMethod,
+        calledWithArg: methodActivity.calledWithArg,
+        nextCalledWith: nextActivity.nextCalledWith
+      })
+      clearInterval(id)
+    }
+  }, callRate)
+}
+
+interface IApiDoubleReturn {
+  calledWithArg: 'string'
+  calledForMethod: any
+  nextCalledWith: any
+}
+
 /**
  * Used for testing rest API methods (get, post...), doubling the ones used by express
  *
@@ -18,50 +87,63 @@ import { IRestApi } from '../interfaces/express'
  * @param request optional request object
  */
 export const apiDoubleFactory = (request: object = {}) => {
-  let calledWithArg
-  let calledForMethod
-  let nextCalledWith
-  const response = (caller: string) => {
-    return {
-      json(value: any) {
-        calledWithArg = value
-        calledForMethod = caller
-      },
-      cookie() {}
-    }
+  const methodActivity: IMethodActivity = {
+    calledForMethod: undefined,
+    calledWithArg: undefined
   }
-  const next = (caller: string) => (value: any) => {
-    nextCalledWith = value
-    calledForMethod = caller
+
+  const nextActivity: INextActivity = {
+    calledForMethod: undefined,
+    nextCalledWith: undefined
   }
+
+  const response = getResponseFunction(methodActivity)
+  const next = getNextFunction(nextActivity)
+
   const api: IRestApi = {
-    get(route: string, ...args: Function[]) {
-      args[args.length - 1](request, response('get'), next('get'))
-    },
-    post(route: string, ...args: Function[]) {
-      args[args.length - 1](request, response('post'), next('post'))
-    }
-    /* tslint:disable */
-    //put(route: string, ...args: Function[]) { args[args.length - 1](request, response('put'), next('put')) },
-    //delete(route: string, ...args: Function[]) { args[args.length - 1](request, response('delete'), next('delete')) }
+    get: method({ request, response, next, name: 'get' }),
+    post: method({ request, response, next, name: 'post' }),
+    put: method({ request, response, next, name: 'put' }),
+    delete: method({ request, response, next, name: 'delete' })
   }
   return {
     api,
-    called(): Promise<{
-      calledWithArg: 'string'
-      calledForMethod: any
-      nextCalledWith: any
-    }> {
+    called(): Promise<IApiDoubleReturn> {
       return new Promise((resolve) => {
-        const id = setInterval(() => {
-          if (calledForMethod) {
-            resolve({ calledWithArg, calledForMethod, nextCalledWith })
-            clearInterval(id)
-          }
-        }, 50)
+        runSimulationApi(methodActivity, nextActivity, resolve)
       })
     }
   }
+}
+
+interface IQueryActivity {
+  called: boolean
+  calledWith: any
+}
+
+const runSimulationQuery = (
+  resolve: Function,
+  queryActivity: IQueryActivity
+) => {
+  let count = 0
+  const numCalls = 2
+  const callRate = 50
+  const id = setInterval(() => {
+    if ((count = count + 1) === numCalls) {
+      resolve(false)
+      clearInterval(id)
+    }
+    if (queryActivity.called) {
+      resolve(queryActivity.calledWith || true)
+      clearInterval(id)
+    }
+  }, callRate)
+}
+
+const wasCalled = (queryActivity: IQueryActivity) => (): Promise<any> => {
+  return new Promise((resolve) => {
+    runSimulationQuery(resolve, queryActivity)
+  })
 }
 
 /**
@@ -80,27 +162,15 @@ export const apiDoubleFactory = (request: object = {}) => {
  * @param response response that comes back from the query
  */
 export const queryDoubleFactory = (response?: any) => {
-  let called = false
-  let calledWith
+  const queryActivity: IQueryActivity = {
+    called: false,
+    calledWith: undefined
+  }
   return {
-    wasCalled(): Promise<any> {
-      return new Promise((resolve) => {
-        let count = 0
-        const id = setInterval(() => {
-          if (count++ === 2) {
-            resolve(false)
-            clearInterval(id)
-          }
-          if (called) {
-            resolve(calledWith || true)
-            clearInterval(id)
-          }
-        }, 50)
-      })
-    },
+    wasCalled: wasCalled(queryActivity),
     query(...args): Promise<any> {
-      called = true
-      calledWith = args
+      queryActivity.called = true
+      queryActivity.calledWith = args
       return Promise.resolve(response)
     }
   }

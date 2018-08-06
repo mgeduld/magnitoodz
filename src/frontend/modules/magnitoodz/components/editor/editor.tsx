@@ -1,5 +1,12 @@
 import * as React from 'react'
 import { alert, inputStyle } from '../../../../styles/constants'
+import { getValidationTests } from './validationTests'
+import { runValidationTests } from '../../../../utils/validation'
+import {
+  isValidString,
+  isValidMagnitude
+} from '../../../../../shared/utils/validation'
+import { InputField } from '../../../../components/input-field'
 
 interface IProps {
   onSubmitMagnitood: Function
@@ -25,42 +32,25 @@ interface IProps {
 
 const validate = ({
   title,
-  description,
   span1Name,
   span2Name,
   span1Magnitude,
-  span2Magnitude,
-  unit
+  span2Magnitude
 }) => {
-  const span1MagnitudeIsOk =
-    !isNaN(span1Magnitude) &&
-    Number(span1Magnitude) > 0 &&
-    Number(span1Magnitude) <= 14000000000
-  const span2MagnitudeIsOk =
-    !isNaN(span2Magnitude) &&
-    Number(span2Magnitude) > 0 &&
-    Number(span2Magnitude) <= 14000000000
-  const span1NameIsOk = span1Name
-  const hasSpan2NameIsOk = span2Name
-  const errors = []
-  if (!span1MagnitudeIsOk) {
-    errors.push(
-      'Span 1 Magnitude must be a number between 1 and 14,000,000,000.'
-    )
-  }
-  if (!span2MagnitudeIsOk) {
-    errors.push(
-      'Span 2 Magnitude must be a number between 1 and 14,000,000,000.'
-    )
-  }
-  if (!span1NameIsOk) {
-    errors.push('Span 1 Name is required.')
-  }
-  if (!hasSpan2NameIsOk) {
-    errors.push('Span 2 Namne is required.')
-  }
-
-  return errors
+  const validationTests = getValidationTests(
+    {
+      title,
+      span_1_magnitude: span1Magnitude,
+      span_2_magnitude: span2Magnitude,
+      span_1_name: span1Name,
+      span_2_name: span2Name
+    },
+    {
+      isValidString,
+      isValidMagnitude
+    }
+  )
+  return runValidationTests(validationTests)
 }
 
 export const Editor: React.SFC<IProps> = ({
@@ -86,15 +76,12 @@ export const Editor: React.SFC<IProps> = ({
 }) => {
   const getData = () => {
     const data: any = {
-      // TODO: remove hard-coding and use actual user id
+      title,
       user_id: userId,
       span_1_name: span1Name,
       span_2_name: span2Name,
       span_1_magnitude: Number(span1Magnitude),
       span_2_magnitude: Number(span2Magnitude)
-    }
-    if (title) {
-      data.title = title
     }
     if (description) {
       data.description = description
@@ -110,88 +97,53 @@ export const Editor: React.SFC<IProps> = ({
       <form className="ml4">
         {errors.length ? <div className={alert}>{errors.join(' ')}</div> : ''}
         <div className="mb2">
-          <label>
-            Title{' '}
-            <input
-              onChange={(e) => updateTitle(e.currentTarget.value)}
-              className={inputStyle}
-              type="text"
-              name="title"
-              placeholder="Sequoias vs Humans"
-            />
-          </label>
+          <InputField
+            label="Title*"
+            placeholder="Sequoias vs Humans"
+            updateFunction={updateTitle}
+          />
         </div>
         <div className="mb2">
-          <label>
-            Description{' '}
-            <input
-              onChange={(e) => updateDescription(e.currentTarget.value)}
-              className={inputStyle}
-              type="text"
-              name="description"
-              placeholder="Sequoias live a long time compared to humans."
-            />
-          </label>
+          <InputField
+            label="Description"
+            placeholder="Sequoias live a long time compared to humans."
+            updateFunction={updateDescription}
+          />
         </div>
         <div className="mb2">
-          <label>
-            Span 1 Name*{' '}
-            <input
-              onChange={(e) => updateSpan1Name(e.currentTarget.value)}
-              className={inputStyle}
-              type="text"
-              name="span_1_name"
-              placeholder="Sequoias"
-            />
-          </label>
+          <InputField
+            label="Span 1 Name*"
+            placeholder="Sequoias"
+            updateFunction={updateSpan1Name}
+          />
         </div>
         <div className="mb2">
-          <label>
-            Span 1 Magnitude*{' '}
-            <input
-              onChange={(e) => updateSpan1Magnitude(e.currentTarget.value)}
-              className={inputStyle}
-              type="text"
-              name="span_1_magnitude"
-              placeholder="3000"
-            />
-          </label>
+          <InputField
+            label="Span 1 Magnitude*"
+            placeholder="3000"
+            updateFunction={updateSpan1Magnitude}
+          />
         </div>
         <div className="mb2">
-          <label>
-            Span 2 Name*{' '}
-            <input
-              onChange={(e) => updateSpan2Name(e.currentTarget.value)}
-              className={inputStyle}
-              type="text"
-              name="span_2_name"
-              placeholder="Humans"
-            />
-          </label>
+          <InputField
+            label="Span 2 Name*"
+            placeholder="Humans"
+            updateFunction={updateSpan2Name}
+          />
         </div>
         <div className="mb2">
-          <label>
-            Span 2 Magnitude*{' '}
-            <input
-              onChange={(e) => updateSpan2Magnitude(e.currentTarget.value)}
-              className={inputStyle}
-              type="text"
-              name="span_2_magnitude"
-              placeholder="80"
-            />
-          </label>
+          <InputField
+            label="Span 2 Magnitude*"
+            placeholder="80"
+            updateFunction={updateSpan2Magnitude}
+          />
         </div>
         <div className="mb2">
-          <label>
-            Units{' '}
-            <input
-              onChange={(e) => updateUnit(e.currentTarget.value)}
-              className={inputStyle}
-              type="text"
-              name="unit"
-              placeholder="years"
-            />
-          </label>
+          <InputField
+            label="Units"
+            placeholder="years"
+            updateFunction={updateUnit}
+          />
         </div>
         <p className="mb2 mt4">* required fields</p>
         <div className="mb2 mt4">
@@ -201,13 +153,12 @@ export const Editor: React.SFC<IProps> = ({
               e.preventDefault()
               const errors = validate({
                 title,
-                description,
                 span1Name,
                 span2Name,
                 span1Magnitude,
-                span2Magnitude,
-                unit
+                span2Magnitude
               })
+              console.log(errors)
               if (errors.length) {
                 updateErrors(errors)
               } else {

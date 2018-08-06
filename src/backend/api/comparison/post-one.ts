@@ -8,16 +8,10 @@ const requiredFields = [
   'span_2_magnitude',
   'span_1_name',
   'span_2_name',
+  'title',
   'user_id'
 ]
-const optionalFields = [
-  'description',
-  'meta',
-  'span_1_name',
-  'span_2_name',
-  'title',
-  'unit'
-]
+const optionalFields = ['description', 'meta', 'unit']
 
 const buildComparison = (body: { [key: string]: any }): object | null => {
   if (isValidObject(body, requiredFields, optionalFields)) {

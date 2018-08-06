@@ -3,7 +3,9 @@ import {
   isPasswordConfirmed,
   isValidDisplayName,
   isValidEmail,
-  isValidPassword
+  isValidPassword,
+  isValidString,
+  isValidMagnitude
 } from './validation'
 
 test('utils::validation::isValidEmail', (t: any) => {
@@ -74,4 +76,24 @@ test('utils::validation::isValidDisplayName', (t: any) => {
     'DisplayName has 80+ characters'
   )
   t.falsy(isValidDisplayName(''), 'DisplayName has no character')
+})
+
+test('utils::validation::isValidString', (t: any) => {
+  t.truthy(isValidString('cat'), 'cat is a valid string')
+  t.truthy(isValidString('42'), '"42" is a valid string')
+  t.falsy(isValidString(''), 'the empty string is not a valid string')
+  t.falsy(isValidString('     '), 'a string of spaces is not a valid string')
+  t.truthy(
+    isValidString('  cat   '),
+    'a string of characters with spaces before/after is a valid string'
+  )
+})
+
+test('utils::validation::isValidMagnitude', (t: any) => {
+  t.truthy(isValidMagnitude(5000), '5000 is a valid magnitude')
+  t.truthy(isValidMagnitude(1), '1 is a valid magnitude')
+  t.truthy(isValidMagnitude(14000000000), '14000000000 is a valid magnitude')
+  t.falsy(isValidMagnitude(0), '0 is not a valid magnitude')
+  t.falsy(isValidMagnitude(-5000), '-5000 is not a valid magnitude')
+  t.falsy(isValidMagnitude(14000000001), '14000000001 is not a valid magnitude')
 })
