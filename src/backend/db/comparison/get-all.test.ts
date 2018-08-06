@@ -15,7 +15,8 @@ test('db:comparison:getAll() makes a connection with default limit and offset', 
     offsetValue = value
     return { limit }
   }
-  const from = () => ({ offset })
+  const orderBy = () => ({ offset })
+  const from = () => ({ orderBy })
   const select = () => ({ from })
   const connection: any = { select }
   const getAll = factory(connection)
@@ -40,7 +41,8 @@ test('db:comparison:getAll() makes a connection with custom limit and default of
     offsetValue = value
     return { limit }
   }
-  const from = () => ({ offset })
+  const orderBy = () => ({ offset })
+  const from = () => ({ orderBy })
   const select = () => ({ from })
   const connection: any = { select }
 
@@ -65,7 +67,8 @@ test('db:comparison:getAll() makes a connection with a custom limit and offset',
     offsetValue = value
     return { limit }
   }
-  const from = () => ({ offset })
+  const orderBy = () => ({ offset })
+  const from = () => ({ orderBy })
   const select = () => ({ from })
   const connection: any = { select }
 

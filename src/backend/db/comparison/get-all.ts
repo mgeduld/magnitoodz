@@ -9,6 +9,7 @@ export const factory = (connection: IConnection) => (
   return connection
     .select('c.*', 'u.name as user_name')
     .from('comparison AS c')
+    .orderBy('created_at', 'desc')
     .offset(offset)
     .limit(limit)
     .leftJoin('user AS u', 'u.id', 'c.user_id')
