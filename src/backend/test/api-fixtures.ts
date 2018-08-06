@@ -87,7 +87,7 @@ export const queryDoubleFactory = (response?: any) => {
       return new Promise((resolve) => {
         let count = 0
         const id = setInterval(() => {
-          if (count++ === 20) {
+          if (count++ === 2) {
             resolve(false)
             clearInterval(id)
           }

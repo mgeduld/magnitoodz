@@ -141,6 +141,7 @@ Users will be able to register, log in, and log out. Only logged-in users will b
   - [] edit a magnitood (yours)
   - [] display a random magnitood
   - [] nav from magnitude to magnitude, slideshow style
+  - [] improve TS for HOC and other places where I've been sloppy
   - [] mobile
   - [] email a Magnitood?
   - [] favorites?
