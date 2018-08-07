@@ -29,6 +29,12 @@ export const updateMagnitood = (magnitood: IComparison): IAction => ({
   type: ActionType.updateMagnitood
 })
 
+export const requestDelete = (id: number, userId: number): IAction => ({
+  id,
+  userId,
+  type: ActionType.requestDelete
+})
+
 export const requestSignup = (credentials: ICredentials) => ({
   credentials,
   type: ActionType.requestSignup

@@ -4,9 +4,11 @@ import { factory as getOneByIdFactory } from './get-one-by-id'
 import { factory as createOneFactory } from './create-one'
 import { factory as getCountFactory } from './get-count'
 import { factory as updateOneFactory } from './update-one'
+import { factory as deleteOneFactory } from './delete-one'
 
 export const getAll = getAllFactory(connection)
 export const getOneById = getOneByIdFactory(connection)
 export const createOne = createOneFactory(connection)
 export const getCount = getCountFactory(connection)
 export const updateOne = updateOneFactory(connection)
+export const deleteOne = deleteOneFactory(connection)

@@ -19,6 +19,7 @@ interface IProps {
   requestMagnitoodz: Function
   postMagnitood: Function
   updateMagnitood: Function
+  requestDelete: Function
   requestSignup: Function
   changeAuthenticationState: Function
   authenticationState: AuthenticationState
@@ -38,6 +39,7 @@ export const Container: React.SFC<IProps> = ({
   requestMagnitoodz,
   postMagnitood,
   updateMagnitood,
+  requestDelete,
   requestSignup,
   authenticationState,
   changeAuthenticationState,
@@ -147,6 +149,7 @@ export const Container: React.SFC<IProps> = ({
                   userId={userId}
                   onInit={requestMagnitood}
                   loadedState={magnitoodLoadedState}
+                  requestDelete={requestDelete}
                 />
               )
             }}

@@ -5,6 +5,7 @@ export enum ActionType {
   requestMagnitood = 'requestMagnitood',
   postMagnitood = 'postMagnitood',
   updateMagnitood = 'updateMagnitood',
+  requestDelete = 'requestDelete',
   requestSignup = 'requestSignup',
   requestLogOut = 'requestLogOut',
   requestLogIn = 'requestLogIn',

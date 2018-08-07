@@ -4,7 +4,6 @@ import { compose } from 'recompose'
 import { applyLifecycle } from 'react-lifecycle-component'
 import { withRouter } from 'react-router-dom'
 import { Container } from './container'
-import { magnitoodz } from '../../../magnitoodz/reducers/magnitoodz'
 import {
   postMagnitood,
   updateMagnitood,
@@ -12,6 +11,7 @@ import {
   requestLogOut,
   requestMagnitood,
   requestMagnitoodz,
+  requestDelete,
   requestSignup,
   changeAuthenticationState
 } from '../../action-creators'
@@ -36,6 +36,7 @@ const mapDispatchToProps = (dispatch) => {
       requestMagnitoodz,
       postMagnitood,
       updateMagnitood,
+      requestDelete,
       requestSignup,
       changeAuthenticationState,
       componentDidMount: requestMagnitoodz

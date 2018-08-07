@@ -40,6 +40,18 @@ const updateMagnitoodAtEndpoint = (magnitood: IComparison) =>
     .then((res) => res.json())
     .catch((error) => console.log('Error updating Magnitood', error))
 
+const deleteMagnitoodViaEndpoint = (id: number, userId: number) =>
+  fetch(`${origin}/api/v1/`, {
+    method: 'Delete',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ id, user_id: userId })
+  })
+    .then((res) => res.json())
+    .catch((error) => console.log('Error posting Magnitood', error))
+
 function* requestMagnitoodz(action: IAction) {
   const response = yield call(
     fetchMagnitoodzFromEndpoint,
@@ -65,9 +77,15 @@ function* updateMagnitood(action: IAction) {
   yield call(requestMagnitoodz, action)
 }
 
+function* requestDelete(action: IAction) {
+  yield call(deleteMagnitoodViaEndpoint, action.id, action.userId)
+  yield call(requestMagnitoodz, action)
+}
+
 export function* saga() {
   yield takeEvery(ActionType.requestMagnitoodz, requestMagnitoodz)
   yield takeEvery(ActionType.requestMagnitood, requestMagnitood)
   yield takeEvery(ActionType.postMagnitood, postMagnitood)
   yield takeEvery(ActionType.updateMagnitood, updateMagnitood)
+  yield takeEvery(ActionType.requestDelete, requestDelete)
 }

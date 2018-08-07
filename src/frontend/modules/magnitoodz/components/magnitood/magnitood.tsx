@@ -13,17 +13,35 @@ interface IProps {
   id: number
   magnitood: IComparison
   onInit: Function
+  requestDelete: Function
   userId: number
   loadedState: MagnitoodLoadedState
+  history: any
 }
 
-export class Magnitood extends React.Component<IProps> {
+interface IState {
+  userChoseDelete: boolean
+}
+
+export class Magnitood extends React.Component<IProps, IState> {
   constructor(props) {
     super(props)
+    this.state = { userChoseDelete: false }
   }
 
   componentDidMount() {
     this.props.onInit(this.props.id)
+  }
+
+  toggleDeleteState = (e) => {
+    e.preventDefault()
+    this.setState({ userChoseDelete: !this.state.userChoseDelete })
+  }
+
+  deleteMagnitood = (user_id: number) => (e) => {
+    e.preventDefault()
+    this.props.requestDelete(this.props.id, user_id)
+    this.props.history.push('/')
   }
 
   render() {
@@ -57,7 +75,28 @@ export class Magnitood extends React.Component<IProps> {
           <p>author: {user_name}</p>
           {description && <p>{description}</p>}
           <div className="tc">
-            {this.props.userId === user_id && <Link to="/update">edit</Link>}
+            {this.props.userId === user_id && (
+              <div>
+                <div>
+                  <Link to="/update">edit</Link> |{' '}
+                  <a onClick={this.toggleDeleteState} href="/update">
+                    delete
+                  </a>
+                </div>
+                {this.state.userChoseDelete && (
+                  <div className="mt3">
+                    Are you sure you want to delete this Magnitood?{' '}
+                    <a onClick={this.toggleDeleteState} href="">
+                      No
+                    </a>{' '}
+                    |{' '}
+                    <a onClick={this.deleteMagnitood(user_id)} href="">
+                      Yes
+                    </a>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
           <div className="ml3 mt4 mb0">
             <BigMagnitudeSpan
