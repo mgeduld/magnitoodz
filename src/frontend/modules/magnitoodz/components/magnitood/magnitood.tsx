@@ -7,12 +7,14 @@ import { getMagnitudesAndNames } from '../../utils/spans'
 import { BigMagnitudeSpan } from '../big-magnitude-span'
 import { renderSmallMagnitude } from '../../utils/render'
 import { maxChunks } from '../../../../components/ui'
+import { MagnitoodLoadedState } from '../../../../enums/magnitood'
 
 interface IProps {
   id: number
   magnitood: IComparison
   onInit: Function
   userId: number
+  loadedState: MagnitoodLoadedState
 }
 
 export class Magnitood extends React.Component<IProps> {
@@ -25,7 +27,7 @@ export class Magnitood extends React.Component<IProps> {
   }
 
   render() {
-    if (this.props.magnitood.span_1_magnitude) {
+    if (this.props.loadedState === MagnitoodLoadedState.loaded) {
       const {
         title,
         span_1_name,

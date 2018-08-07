@@ -55,12 +55,13 @@ function* requestMagnitood(action: IAction) {
 }
 
 function* postMagnitood(action: IAction) {
-  yield call(updateMagnitoodAtEndpoint, action.magnitood)
+  yield call(postMagnitoodToEndpoint, action.magnitood)
   yield call(requestMagnitoodz, action)
 }
 
 function* updateMagnitood(action: IAction) {
   yield call(updateMagnitoodAtEndpoint, action.magnitood)
+  yield call(requestMagnitood, { ...action, id: action.magnitood.id })
   yield call(requestMagnitoodz, action)
 }
 

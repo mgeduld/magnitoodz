@@ -6,6 +6,8 @@ import { Login, Signup } from '../../../authentication'
 import { IComparison } from '../../../../../shared/interfaces/comparison'
 import { AuthenticationState } from '../../../../enums/authentication'
 import { ICredentials } from '../../../../../shared/interfaces/authentication'
+import { MagnitoodLoadedState } from '../../../../enums/magnitood'
+import { MagnitoodzLoadedState } from '../../../../enums/magnitoodz'
 
 interface IProps {
   magnitood: IComparison
@@ -20,6 +22,8 @@ interface IProps {
   requestSignup: Function
   changeAuthenticationState: Function
   authenticationState: AuthenticationState
+  magnitoodLoadedState: MagnitoodLoadedState
+  magnitoodzLoadedState: MagnitoodzLoadedState
   userId: number
   userName: string
 }
@@ -37,6 +41,8 @@ export const Container: React.SFC<IProps> = ({
   requestSignup,
   authenticationState,
   changeAuthenticationState,
+  magnitoodLoadedState,
+  magnitoodzLoadedState,
   userId,
   userName
 }) => {
@@ -125,6 +131,7 @@ export const Container: React.SFC<IProps> = ({
                   magnitoodz={magnitoodz}
                   count={magnitoodzCount}
                   requestMagnitoodz={requestMagnitoodz}
+                  loadedState={magnitoodzLoadedState}
                 />
               )
             }}
@@ -139,6 +146,7 @@ export const Container: React.SFC<IProps> = ({
                   id={match.params.id}
                   userId={userId}
                   onInit={requestMagnitood}
+                  loadedState={magnitoodLoadedState}
                 />
               )
             }}

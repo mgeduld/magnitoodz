@@ -1,11 +1,27 @@
 import { IAction } from '../../../interfaces/action'
 import { ActionType } from '../../../enums/action-type'
-import { IComparison } from '../../../../shared/interfaces/comparison'
+import { MagnitoodLoadedState } from '../../../enums/magnitood'
 
-export const magnitood = (state: IComparison = {}, action: IAction) => {
+export const magnitood = (
+  state = {
+    magnitoodLoadedState: MagnitoodLoadedState.notLoaded,
+    magnitood: {}
+  },
+  action: IAction
+) => {
   switch (action.type) {
+    case ActionType.updateMagnitood:
+    case ActionType.requestMagnitood:
+      return {
+        ...state,
+        magnitoodLoadedState: MagnitoodLoadedState.loading
+      }
     case ActionType.storeMagnitood:
-      return action.data
+      return {
+        ...state,
+        magnitood: action.data,
+        magnitoodLoadedState: MagnitoodLoadedState.loaded
+      }
     default:
       return state
   }

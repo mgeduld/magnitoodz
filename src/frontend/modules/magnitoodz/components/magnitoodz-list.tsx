@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom'
 import { IComparison } from '../../../../shared/interfaces/comparison'
 import { PaginationNav } from '../../../components'
 import { pagesToDisplay, itemsPerPage } from '../../../components/ui'
+import { MagnitoodzLoadedState } from '../../../enums/magnitoodz'
 
 interface IProps {
   magnitoodz: IComparison[]
   count: number
   requestMagnitoodz: Function
+  loadedState: MagnitoodzLoadedState
 }
 
 const renderItems = (data: IComparison[]) => {
@@ -23,9 +25,10 @@ const renderItems = (data: IComparison[]) => {
 export const MagnitoodzList: React.SFC<IProps> = ({
   magnitoodz,
   count,
-  requestMagnitoodz
+  requestMagnitoodz,
+  loadedState
 }) => {
-  return (
+  return loadedState === MagnitoodzLoadedState.loaded ? (
     <div>
       <div className="mt4 ml4">{renderItems(magnitoodz)}</div>
       <div className="mt4">
@@ -41,5 +44,7 @@ export const MagnitoodzList: React.SFC<IProps> = ({
         )}
       </div>
     </div>
+  ) : (
+    <div>Loading ...</div>
   )
 }

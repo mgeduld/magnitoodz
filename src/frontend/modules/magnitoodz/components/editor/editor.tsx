@@ -225,7 +225,7 @@ export const Editor: React.SFC<IProps> = ({
                 updateErrors([])
                 const data = getData()
                 onSubmitMagnitood(data, !!magnitood)
-                history.push(magnitood ? `/magnitood/${magnitood.id}` : '/')
+                history.push(magnitood.id ? `/magnitood/${magnitood.id}` : '/')
               }
             }}
           >

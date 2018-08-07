@@ -4,6 +4,7 @@ import { compose } from 'recompose'
 import { applyLifecycle } from 'react-lifecycle-component'
 import { withRouter } from 'react-router-dom'
 import { Container } from './container'
+import { magnitoodz } from '../../../magnitoodz/reducers/magnitoodz'
 import {
   postMagnitood,
   updateMagnitood,
@@ -16,8 +17,10 @@ import {
 } from '../../action-creators'
 
 const mapStateToProps = ({ magnitoodz, magnitood, authentication }) => ({
-  magnitood,
+  magnitood: magnitood.magnitood,
+  magnitoodLoadedState: magnitood.magnitoodLoadedState,
   magnitoodz: magnitoodz.magnitoodz,
+  magnitoodzLoadedState: magnitoodz.magnitoodzLoadedState,
   magnitoodzCount: magnitoodz.count,
   authenticationState: authentication.authenticationState,
   userId: authentication.id,
