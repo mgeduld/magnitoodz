@@ -148,11 +148,7 @@ export const Container: React.SFC<IProps> = ({
             path="/create"
             render={() => {
               return (
-                <Editor
-                  userId={userId}
-                  onUpdateMagnitood={updateMagnitood}
-                  onSubmitMagnitood={postMagnitood}
-                />
+                <Editor userId={userId} onSubmitMagnitood={postMagnitood} />
               )
             }}
           />
@@ -164,7 +160,7 @@ export const Container: React.SFC<IProps> = ({
                 <Editor
                   userId={userId}
                   magnitood={magnitood}
-                  onSubmitMagnitood={postMagnitood}
+                  onSubmitMagnitood={updateMagnitood}
                 />
               )
             }}

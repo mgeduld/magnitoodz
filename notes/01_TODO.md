@@ -97,6 +97,15 @@ Users will be able to register, log in, and log out. Only logged-in users will b
   - [x] changes to parent components
   - [] query
   - [] api
+- Delete a magnitood
+  - [] conditional link on magnitood page
+  - [] confirmation modal
+  - [] action creator
+  - [] changes to parent
+  - [] saga
+  - [] reducer
+  - [] api
+  - [] query
 - [] rating
   - [] table
   - [] rate query
@@ -153,8 +162,6 @@ Users will be able to register, log in, and log out. Only logged-in users will b
   - [] make sure all modules only export from index (front/back)
   - [] fix indents and prettier
   - [] replace description textfield with text area (markdown?)
-  - [] delete a magnitood (yours)
-  - [] edit a magnitood (yours)
   - [] display a random magnitood
   - [] nav from magnitude to magnitude, slideshow style
   - [] improve TS for HOC and other places where I've been sloppy

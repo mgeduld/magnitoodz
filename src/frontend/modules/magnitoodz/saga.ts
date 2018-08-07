@@ -18,8 +18,11 @@ const fetchMagnitoodFromEndpoint = (id: number) =>
     .then((res) => res.json())
     .catch((error) => console.log('Error fetching Magnitood', error))
 
-const getPostConfig = (magnitood): RequestInit => ({
-  method: 'POST',
+const getPostConfig = (
+  magnitood: IComparison,
+  isNew: boolean = true
+): RequestInit => ({
+  method: isNew ? 'POST' : 'PUT',
   credentials: 'include',
   headers: {
     'Content-Type': 'application/json'
@@ -33,7 +36,7 @@ const postMagnitoodToEndpoint = (magnitood: IComparison) =>
     .catch((error) => console.log('Error posting Magnitood', error))
 
 const updateMagnitoodAtEndpoint = (magnitood: IComparison) =>
-  fetch(`${origin}/api/v1/update`, getPostConfig(magnitood))
+  fetch(`${origin}/api/v1/`, getPostConfig(magnitood, false))
     .then((res) => res.json())
     .catch((error) => console.log('Error updating Magnitood', error))
 
@@ -57,7 +60,7 @@ function* postMagnitood(action: IAction) {
 }
 
 function* updateMagnitood(action: IAction) {
-  yield call(postMagnitoodToEndpoint, action.magnitood)
+  yield call(updateMagnitoodAtEndpoint, action.magnitood)
   yield call(requestMagnitoodz, action)
 }
 

@@ -8,7 +8,6 @@ import {
 } from '../../../../../shared/utils/validation'
 import { InputField } from '../../../../components/input-field'
 import { IComparison } from '../../../../../shared/interfaces/comparison'
-import { magnitood } from '../../reducers/magnitood'
 
 interface IProps {
   onSubmitMagnitood: Function
@@ -226,7 +225,7 @@ export const Editor: React.SFC<IProps> = ({
                 updateErrors([])
                 const data = getData()
                 onSubmitMagnitood(data, !!magnitood)
-                history.push('/')
+                history.push(magnitood ? `/magnitood/${magnitood.id}` : '/')
               }
             }}
           >
