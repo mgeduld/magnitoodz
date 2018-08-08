@@ -27,6 +27,7 @@ interface IProps {
   magnitoodzLoadedState: MagnitoodzLoadedState
   userId: number
   userName: string
+  history: any
 }
 
 export const Container: React.SFC<IProps> = ({
@@ -46,7 +47,7 @@ export const Container: React.SFC<IProps> = ({
   magnitoodLoadedState,
   magnitoodzLoadedState,
   userId,
-  userName
+  history
 }) => {
   const onSubmitSignup = (credentials: ICredentials) => {
     requestSignup(credentials)
@@ -58,12 +59,7 @@ export const Container: React.SFC<IProps> = ({
     changeAuthenticationState(AuthenticationState.loggingIn)
   }
 
-  const shouldShowAuthenticationLinks =
-    [
-      AuthenticationState.loggedOut,
-      AuthenticationState.signUpFailed,
-      AuthenticationState.logInFailed
-    ].indexOf(authenticationState) !== -1
+  const shouldShowAuthenticationLinks = localStorage.user_id === undefined
 
   return (
     <div>
@@ -103,23 +99,26 @@ export const Container: React.SFC<IProps> = ({
                   href=""
                   onClick={(e) => {
                     e.preventDefault()
+                    localStorage.removeItem('user_id')
+                    localStorage.removeItem('user_name')
                     requestLogOut()
+                    history.push('/')
                   }}
                 >
                   log out
                 </a>
               </span>
             )}
-            {userId !== undefined && (
+            {localStorage.user_id !== undefined && (
               <span>
                 {' '}
                 | <Link to="/create">[+] New Magnitood</Link>
               </span>
             )}
           </div>
-          {userId !== undefined && (
+          {localStorage.user_name !== undefined && (
             <div className="tc mt4">
-              <span>Hello, {userName}!</span>
+              <span>Hello, {localStorage.user_name}!</span>
             </div>
           )}
         </div>

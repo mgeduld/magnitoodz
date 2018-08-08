@@ -38,9 +38,9 @@ export class Magnitood extends React.Component<IProps, IState> {
     this.setState({ userChoseDelete: !this.state.userChoseDelete })
   }
 
-  deleteMagnitood = (user_id: number) => (e) => {
+  deleteMagnitood = () => (e) => {
     e.preventDefault()
-    this.props.requestDelete(this.props.id, user_id)
+    this.props.requestDelete(this.props.id, localStorage.userId)
     this.props.history.push('/')
   }
 
@@ -75,28 +75,29 @@ export class Magnitood extends React.Component<IProps, IState> {
           <p>author: {user_name}</p>
           {description && <p>{description}</p>}
           <div className="tc">
-            {this.props.userId === user_id && (
-              <div>
+            {localStorage.user_id !== undefined &&
+              String(user_id) === localStorage.user_id && (
                 <div>
-                  <Link to="/update">edit</Link> |{' '}
-                  <a onClick={this.toggleDeleteState} href="/update">
-                    delete
-                  </a>
-                </div>
-                {this.state.userChoseDelete && (
-                  <div className="mt3">
-                    Are you sure you want to delete this Magnitood?{' '}
-                    <a onClick={this.toggleDeleteState} href="">
-                      No
-                    </a>{' '}
-                    |{' '}
-                    <a onClick={this.deleteMagnitood(user_id)} href="">
-                      Yes
+                  <div>
+                    <Link to="/update">edit</Link> |{' '}
+                    <a onClick={this.toggleDeleteState} href="/update">
+                      delete
                     </a>
                   </div>
-                )}
-              </div>
-            )}
+                  {this.state.userChoseDelete && (
+                    <div className="mt3">
+                      Are you sure you want to delete this Magnitood?{' '}
+                      <a onClick={this.toggleDeleteState} href="">
+                        No
+                      </a>{' '}
+                      |{' '}
+                      <a onClick={this.deleteMagnitood()} href="">
+                        Yes
+                      </a>
+                    </div>
+                  )}
+                </div>
+              )}
           </div>
           <div className="ml3 mt4 mb0">
             <BigMagnitudeSpan

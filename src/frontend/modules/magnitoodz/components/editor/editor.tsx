@@ -92,7 +92,7 @@ export const Editor: React.SFC<IProps> = ({
   }
   const getData = () => {
     const data: any = {
-      user_id: userId,
+      user_id: localStorage.user_id,
       title: magnitood ? dataCollectorForUpdates.title['value'] : title,
       span_1_name: magnitood
         ? dataCollectorForUpdates.span1Name['value']

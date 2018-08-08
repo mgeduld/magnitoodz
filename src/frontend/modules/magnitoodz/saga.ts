@@ -47,7 +47,7 @@ const deleteMagnitoodViaEndpoint = (id: number, userId: number) =>
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ id, user_id: userId })
+    body: JSON.stringify({ id, user_id: localStorage.user_id })
   })
     .then((res) => res.json())
     .catch((error) => console.log('Error posting Magnitood', error))
