@@ -14,7 +14,6 @@ const requiredFields = [
 const optionalFields = ['description', 'meta', 'unit', 'id']
 
 const buildComparison = (body: { [key: string]: any }): object | null => {
-  console.log('body', body)
   if (isValidObject(body, requiredFields, optionalFields)) {
     return {
       ...body,
