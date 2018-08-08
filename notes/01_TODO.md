@@ -140,6 +140,7 @@ Users will be able to register, log in, and log out. Only logged-in users will b
   - [x] persist login
   - [x] sort by most recent
   - [x] loader for all api calls
+  - [] reasonably limit description lengths
   - [] add fields for citations
   - [] add banishment
   - [] sort by author

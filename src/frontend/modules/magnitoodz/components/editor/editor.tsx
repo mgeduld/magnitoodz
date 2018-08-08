@@ -74,22 +74,14 @@ export const Editor: React.SFC<IProps> = ({
   updateUnit,
   updateErrors,
   history,
-  userId,
   magnitood = {}
 }) => {
   // unfortunately, we can't automatically trigger the update functions,
   // and if the user is updating an onld Magnitude, he may not
   // update all fields. So we'll have to populate this object
   // with refs
-  const dataCollectorForUpdates = {
-    title,
-    description,
-    span1Name,
-    span1Magnitude,
-    span2Name,
-    span2Magnitude,
-    unit
-  }
+  const dataCollectorForUpdates: { [key: string]: any } = {}
+
   const getData = () => {
     const data: any = {
       user_id: localStorage.user_id,
@@ -120,6 +112,7 @@ export const Editor: React.SFC<IProps> = ({
     }
     return data
   }
+  /* tslint:disable ter-indent */
   return (
     <div className="ml4">
       <h2>{magnitood ? 'Edit' : 'New'} Magnitood</h2>
@@ -136,13 +129,32 @@ export const Editor: React.SFC<IProps> = ({
           />
         </div>
         <div className="mb2">
-          <InputField
-            label="Description"
+          <div>
+            <label>
+              Description (accepts{' '}
+              <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">
+                Markdown
+              </a>)
+            </label>
+          </div>
+          <textarea
+            className="bg-black white"
+            rows={4}
+            cols={50}
+            defaultValue={magnitood.description || undefined}
             placeholder="Sequoias live a long time compared to humans."
-            updateFunction={updateDescription}
-            value={magnitood.description}
-            dataCollector={dataCollectorForUpdates}
-            dataCollectorField={'description'}
+            onChange={
+              dataCollectorForUpdates
+                ? undefined
+                : (e) => {
+                    updateDescription(e.currentTarget.value)
+                  }
+            }
+            ref={(el) => {
+              if (dataCollectorForUpdates) {
+                dataCollectorForUpdates['description'] = el
+              }
+            }}
           />
         </div>
         <div className="mb2">

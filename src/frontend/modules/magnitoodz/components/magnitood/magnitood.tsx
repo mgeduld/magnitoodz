@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
+import ReactMarkdown = require('react-markdown')
 import { IComparison } from '../../../../../shared/interfaces/comparison'
 import { colors } from '../../../../constants/colors'
 import { MagnificationKey } from '../magnification-key'
@@ -73,7 +74,7 @@ export class Magnitood extends React.Component<IProps, IState> {
         <div className="w-100">
           <h2>{title}</h2>
           <p>author: {user_name}</p>
-          {description && <p>{description}</p>}
+          {description && <ReactMarkdown source={description} />}
           <div className="tc">
             {localStorage.user_id !== undefined &&
               String(user_id) === localStorage.user_id && (
