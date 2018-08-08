@@ -86,7 +86,7 @@ Users will be able to register, log in, and log out. Only logged-in users will b
   - [x] reducers
   - [x] action creators
   - [x] changes to parent compoents
-- [] Edit a magnitood
+- [x] Edit a magnitood
   - [x] conditionally display edit option (you're logged in and it's yours to edit)
   - [x] put values in editor
   - [x] send id to editor
@@ -95,17 +95,17 @@ Users will be able to register, log in, and log out. Only logged-in users will b
   - [x] saga
   - [x] reducer
   - [x] changes to parent components
-  - [] query
-  - [] api
-- Delete a magnitood
-  - [] conditional link on magnitood page
-  - [] confirmation modal
-  - [] action creator
-  - [] changes to parent
-  - [] saga
-  - [] reducer
-  - [] api
-  - [] query
+  - [x] query
+  - [x] api
+- [x] Delete a magnitood
+  - [x] conditional link on magnitood page
+  - [x] confirmation modal
+  - [x] action creator
+  - [x] changes to parent
+  - [x] saga
+  - [x] reducer
+  - [x] api
+  - [x] query
 - [] rating
   - [] table
   - [] rate query
@@ -129,7 +129,7 @@ Users will be able to register, log in, and log out. Only logged-in users will b
 - [] upgrade design
   - [] general
   - [] header
-- Misc
+- [] Misc
   - [x] make magnitood title required
   - [x] refactor big functions
   - [x] join tables to return user data with magnitoodz
@@ -137,11 +137,11 @@ Users will be able to register, log in, and log out. Only logged-in users will b
   - [x] format numbers for display (commas)
   - [x] convert all components to SFC
   - [x] add descriptions to all test assertions in tests with multiple assertions
-  - [] persist login
+  - [x] persist login
+  - [x] sort by most recent
+  - [x] loader for all api calls
   - [] add fields for citations
   - [] add banishment
-  - [] sort by most recent
-  - [] loader for all api calls
   - [] sort by author
   - [] add validation to all forms and apis
   - [] make more examples for seeding
@@ -151,7 +151,6 @@ Users will be able to register, log in, and log out. Only logged-in users will b
   - [] account verify email
   - [] dockerize
   - [] finalize README
-  - [] sort list by most recent
   - [] get rid of all magic strings/numbers
   - [] unit tests for react code
   - [] make typescript play nice with recompose
