@@ -2,7 +2,7 @@ import { call, put, takeEvery } from 'redux-saga/effects'
 import { ActionType } from '../../enums/action-type'
 import { IAction } from '../../interfaces/action'
 import { IComparison } from '../../../shared/interfaces/comparison'
-import { itemsPerPage } from '../../components/ui'
+import { itemsPerPage } from '../../constants/ui'
 
 const origin: string = process.env.SERVER_ORIGIN
 

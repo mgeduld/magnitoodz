@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { IComparison } from '../../../../shared/interfaces/comparison'
 import { PaginationNav } from '../../../components'
-import { pagesToDisplay, itemsPerPage } from '../../../components/ui'
+import { pagesToDisplay, itemsPerPage } from '../../../constants/ui'
 import { MagnitoodzLoadedState } from '../../../enums/magnitoodz'
 
 interface IProps {

@@ -17,7 +17,7 @@ export const DashTranslation: React.SFC<IProps> = ({
         <span className={color}>-</span>
         <span>
           {' '}
-          equals {chunkSize.toLocaleString()} {unit && unit}{' '}
+          a single dash above equals {chunkSize.toLocaleString()} {unit && unit}{' '}
         </span>
       </span>
     </div>

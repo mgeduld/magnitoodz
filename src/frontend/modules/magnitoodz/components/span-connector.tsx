@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { maxChunks } from '../../../components/ui'
+import { maxChunks } from '../../../constants/ui'
 
 export const SpanConnector: React.SFC<any> = () => {
   return (

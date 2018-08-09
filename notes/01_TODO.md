@@ -140,6 +140,7 @@ Users will be able to register, log in, and log out. Only logged-in users will b
   - [x] persist login
   - [x] sort by most recent
   - [x] loader for all api calls
+  - [x] replace description textfield with text area (markdown?)
   - [] reasonably limit description lengths
   - [] add fields for citations
   - [] add banishment
@@ -161,7 +162,6 @@ Users will be able to register, log in, and log out. Only logged-in users will b
   - [] display api catch errors to user
   - [] make sure all modules only export from index (front/back)
   - [] fix indents and prettier
-  - [] replace description textfield with text area (markdown?)
   - [] display a random magnitood
   - [] nav from magnitude to magnitude, slideshow style
   - [] improve TS for HOC and other places where I've been sloppy

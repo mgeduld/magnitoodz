@@ -23,4 +23,4 @@ export const isValidString = (value: string) =>
   typeof value === 'string' && value !== undefined && value.trim() !== ''
 
 export const isValidMagnitude = (magnitude) =>
-  !isNaN(magnitude) && magnitude >= 1 && magnitude <= 14000000000
+  !isNaN(magnitude) && magnitude >= 1 && magnitude <= 200000000000

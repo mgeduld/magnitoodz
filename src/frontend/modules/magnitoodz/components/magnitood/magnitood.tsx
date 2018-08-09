@@ -7,7 +7,7 @@ import { MagnificationKey } from '../magnification-key'
 import { getMagnitudesAndNames } from '../../utils/spans'
 import { BigMagnitudeSpan } from '../big-magnitude-span'
 import { renderSmallMagnitude } from '../../utils/render'
-import { maxChunks } from '../../../../components/ui'
+import { maxChunks } from '../../../../constants/ui'
 import { MagnitoodLoadedState } from '../../../../enums/magnitood'
 
 interface IProps {

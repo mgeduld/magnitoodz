@@ -3,7 +3,7 @@ import { IComparison } from '../../../shared/interfaces/comparison'
 import { IAction } from '../../interfaces/action'
 import { ICredentials } from '../../../shared/interfaces/authentication'
 import { AuthenticationState } from '../../enums/authentication'
-import { itemsPerPage } from '../../components/ui'
+import { itemsPerPage } from '../../constants/ui'
 
 export const requestMagnitoodz = (
   offset = 0,
