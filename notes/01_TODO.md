@@ -141,6 +141,7 @@ Users will be able to register, log in, and log out. Only logged-in users will b
   - [x] sort by most recent
   - [x] loader for all api calls
   - [x] replace description textfield with text area (markdown?)
+  - [x] refactor and test render and span modules. How many classes can I get rid of?
   - [] reasonably limit description lengths
   - [] add fields for citations
   - [] add banishment

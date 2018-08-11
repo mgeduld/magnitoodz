@@ -1,0 +1,20 @@
+.chunk {
+  display: inline-block;
+  width: 4px;
+  height: 10px;
+}
+
+body {
+  background: black;
+  color: white;
+}
+
+* {
+  font-family: 'Inconsolata', monospace;
+}
+
+a,
+a:hover,
+a:visited {
+  color: white;
+}

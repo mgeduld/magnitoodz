@@ -2,13 +2,10 @@ import * as React from 'react'
 import { Link } from 'react-router-dom'
 import ReactMarkdown = require('react-markdown')
 import { IComparison } from '../../../../../shared/interfaces/comparison'
-import { colors } from '../../../../constants/colors'
-import { MagnificationKey } from '../magnification-key'
 import { getMagnitudesAndNames } from '../../utils/spans'
-import { BigMagnitudeSpan } from '../big-magnitude-span'
-import { renderSmallMagnitude } from '../../utils/render'
 import { maxChunks } from '../../../../constants/ui'
 import { MagnitoodLoadedState } from '../../../../enums/magnitood'
+import { ComparisonAnimation } from '../../utils/render2'
 
 interface IProps {
   id: number
@@ -101,30 +98,14 @@ export class Magnitood extends React.Component<IProps, IState> {
               )}
           </div>
           <div className="ml3 mt4 mb0">
-            <BigMagnitudeSpan
-              colors={colors}
+            <ComparisonAnimation
               bigMagnitude={bigMagnitude}
               bigMagnitudeName={bigMagnitudeName}
-              maxChunks={maxChunks}
+              smallMagnitude={smallMagnitude}
+              smallMagnitudeName={smallMagnitudeName}
               unit={unit}
+              spanLength={maxChunks}
             />
-            {smallMagnitude <= bigMagnitude / maxChunks && (
-              <div className="mt0 ml4">
-                <MagnificationKey
-                  bigMagnitude={bigMagnitude}
-                  maxChunks={maxChunks}
-                  unit={unit}
-                />
-              </div>
-            )}
-            {bigMagnitude &&
-              renderSmallMagnitude({
-                bigMagnitude,
-                smallMagnitude,
-                smallMagnitudeName,
-                maxChunks,
-                unit
-              })}
           </div>
         </div>
       )
